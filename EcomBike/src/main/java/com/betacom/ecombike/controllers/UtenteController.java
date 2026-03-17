@@ -90,12 +90,12 @@ public class UtenteController {
 		
 	}
 	
-	@GetMapping("/findById")
-	public ResponseEntity<Object> findById (@RequestParam (required = true)  String id){
+	@GetMapping("/findByUserName")
+	public ResponseEntity<Object> findById (@RequestParam (required = true)  String userName){
 		Object r = new Object();
 		HttpStatus status = HttpStatus.OK;
 		try {
-			r= utS.getByUserName(id);
+			r= utS.getByUserName(userName);
 		} catch (Exception e) {
 			r=e.getMessage();
 			status = HttpStatus.BAD_REQUEST;
