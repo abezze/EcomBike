@@ -8,4 +8,8 @@
 
     drop table if exists messaggi_sistema cascade;
 
+    drop table if exists pagamento cascade;
+
+    drop table if exists tipo_pagamento cascade;
+
     drop table if exists utente cascade;
