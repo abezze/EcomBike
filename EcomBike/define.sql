@@ -4,6 +4,7 @@
         cap varchar(10) not null,
         citta varchar(50) not null,
         via varchar(100) not null,
+        utente_user_name varchar(255) unique,
         primary key (id)
     );
 
@@ -14,3 +15,8 @@
         user_name varchar(255) not null,
         primary key (user_name)
     );
+
+    alter table if exists indirizzi 
+       add constraint FKsudfceq03yve264uvu8vxr1kr 
+       foreign key (utente_user_name) 
+       references utente;

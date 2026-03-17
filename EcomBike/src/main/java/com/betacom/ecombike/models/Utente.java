@@ -2,8 +2,10 @@ package com.betacom.ecombike.models;
 
 import com.betacom.ecombike.enums.Roles;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +23,12 @@ public class Utente {
 	private String password;
 	private String email;
 	private Roles role;
+	
+	@OneToOne(
+			mappedBy = "utente",
+			cascade =  CascadeType.REMOVE
+			)
+	private Indirizzi indirizzi;
 	
 
 }
