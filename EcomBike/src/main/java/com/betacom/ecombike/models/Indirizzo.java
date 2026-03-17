@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "indirizzi")
-public class Indirizzi {
+public class Indirizzo {
 
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +31,9 @@ public class Indirizzi {
 
  @Column(name = "cap", nullable = false, length = 10)
  private String cap;
+ 
+ @Column(name = "telefono", nullable = false, length = 20)
+ private String telefono;
 
  @OneToOne
 	@JoinColumn(
