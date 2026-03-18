@@ -16,7 +16,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@Table(name = "indirizzi")
+@Table(name = "anagrafica")
 public class Anagrafica {
 
  @Id
