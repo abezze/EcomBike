@@ -52,9 +52,11 @@ public class IndirizzoSpedizione {
 
  @OneToOne
 	@JoinColumn(
-			name="utente_userName",
-			referencedColumnName = "userName"
+			name="ordine_indirizzo",
+			referencedColumnName = "id"
 			)
-	private Utente utente;
+	private Ordine ordineIndirizzo;
+ 
+ 
 
 }

@@ -8,12 +8,26 @@
        drop constraint if exists FKg8p950u9hg0towv49etgqvfo2;
 
     alter table if exists indirizzo_spedizione 
-       drop constraint if exists FKehywytnkgipqu5b9fecs6nxb5;
+       drop constraint if exists FKdgh66lk2x1vbnp6ca8kbjcvlq;
+
+    alter table if exists ordine 
+       drop constraint if exists FKdg320enjlk6khf1wx5x8o28qx;
+
+    alter table if exists pagamento 
+       drop constraint if exists FKnnhmthau4vxeibihypqc1c4sx;
 
     alter table if exists pagamento 
        drop constraint if exists FKlokfc657jetko2tqpe3y812ip;
 
+    alter table if exists prodotto 
+       drop constraint if exists FKp54y50a2i7pdiipduc60tttrw;
+
+    alter table if exists prodotto 
+       drop constraint if exists FK6c0w5h93inpchkwv7ep4gnv62;
+
     drop table if exists anagrafica cascade;
+
+    drop table if exists categoria cascade;
 
     drop table if exists dettaglio_ordine cascade;
 
@@ -24,6 +38,8 @@
     drop table if exists ordine cascade;
 
     drop table if exists pagamento cascade;
+
+    drop table if exists prodotto cascade;
 
     drop table if exists tipo_pagamento cascade;
 
