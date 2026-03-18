@@ -30,12 +30,15 @@ public class DettaglioOrdine {
     @ManyToOne
     @JoinColumn(name = "ordine_id") 
     private Ordine ordine;
-    
+    /*
     @OneToOne(
 			mappedBy = "dettaglioOrdine",
 			cascade =  CascadeType.REMOVE
 			)
-	private Prodotto prodotto;
+	private Prodotto prodotto;*/
+    @ManyToOne
+    @JoinColumn(name = "prodotto_id") 
+    private Prodotto prodotto;
 
     
 }

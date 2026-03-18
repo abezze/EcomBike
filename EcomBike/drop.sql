@@ -7,6 +7,9 @@
     alter table if exists dettaglio_ordine 
        drop constraint if exists FKg8p950u9hg0towv49etgqvfo2;
 
+    alter table if exists dettaglio_ordine 
+       drop constraint if exists FKofsv22kynl273k3meewu00yrr;
+
     alter table if exists indirizzo_spedizione 
        drop constraint if exists FKdgh66lk2x1vbnp6ca8kbjcvlq;
 
@@ -21,9 +24,6 @@
 
     alter table if exists prodotto 
        drop constraint if exists FKp54y50a2i7pdiipduc60tttrw;
-
-    alter table if exists prodotto 
-       drop constraint if exists FK6c0w5h93inpchkwv7ep4gnv62;
 
     drop table if exists anagrafica cascade;
 
