@@ -15,5 +15,5 @@ public class UtenteDTO {
 	private String password;
 	private String email;
 	private String role;
-	private IndirizzoDTO indirizzo;
+	private AnagraficaDTO anagrafica;
 }

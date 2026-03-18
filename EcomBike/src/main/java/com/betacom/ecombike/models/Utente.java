@@ -28,7 +28,7 @@ public class Utente {
 			mappedBy = "utente",
 			cascade =  CascadeType.REMOVE
 			)
-	private Indirizzo indirizzo;
+	private Anagrafica anagrafica;
 	
 
 }

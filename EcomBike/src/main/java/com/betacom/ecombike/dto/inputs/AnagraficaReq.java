@@ -7,12 +7,17 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class IndirizzoReq {
+public class AnagraficaReq {
 	
 	 private Long id;
+	 private String nome;
+	 private String cognome;
 	 private String via;
 	 private String citta;
 	 private String cap;
+	 private String nazione;
 	 private String telefono;
+	 private String codiceFiscale;
+	 private String partitaIva;
 
 }

@@ -17,11 +17,17 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "indirizzi")
-public class Indirizzo {
+public class Anagrafica {
 
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private Long id;
+ 
+ @Column(name = "nome", nullable = false, length = 50)
+ private String nome;
+ 
+ @Column(name = "cognome", nullable = false, length = 50)
+ private String cognome;
 
  @Column(name = "via", nullable = false, length = 100)
  private String via;
@@ -32,8 +38,17 @@ public class Indirizzo {
  @Column(name = "cap", nullable = false, length = 10)
  private String cap;
  
+ @Column(name = "nazione", nullable = false, length = 30)
+ private String nazione;
+ 
  @Column(name = "telefono", nullable = false, length = 20)
  private String telefono;
+ 
+ @Column(name = "codiceFiscale", nullable = true, length = 20)
+ private String codiceFiscale;
+ 
+ @Column(name = "partitaIva", nullable = true, length = 20)
+ private String partitaIva;
 
  @OneToOne
 	@JoinColumn(
