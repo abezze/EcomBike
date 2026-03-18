@@ -4,6 +4,9 @@
     alter table if exists indirizzi 
        drop constraint if exists FKsudfceq03yve264uvu8vxr1kr;
 
+    alter table if exists pagamento 
+       drop constraint if exists FKlokfc657jetko2tqpe3y812ip;
+
     drop table if exists indirizzi cascade;
 
     drop table if exists messaggi_sistema cascade;

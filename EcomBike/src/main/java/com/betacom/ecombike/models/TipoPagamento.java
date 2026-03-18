@@ -1,10 +1,14 @@
 package com.betacom.ecombike.models;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,14 +26,21 @@ public class TipoPagamento {
 	 private Long id;
 	
 	@Column (
-			name="pagamento",
+			name="tipo_pagamento",
 			nullable = false
 			)
-	private String pagamento;
+	private String tipo_pagamento;
+	
 	@Column (
 			name="societa_creditrice",
 			nullable = false
 			)
 	private String societaCreditrice;
+	
+	@OneToMany(
+			mappedBy = "tipoPagamento",
+			fetch = FetchType.EAGER
+			)
+	private List<Pagamento> pagamentos;
 
 }
