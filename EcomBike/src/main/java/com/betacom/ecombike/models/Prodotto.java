@@ -36,6 +36,9 @@ public class Prodotto {
 	 
 	 private int quantita;
 	 
+	 @Column(name = "taglia", nullable = true, length = 20)
+	 private String taglia;
+	 
 	 
 	 @ManyToOne
      @JoinColumn(name = "categoria_id") 

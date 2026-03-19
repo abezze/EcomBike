@@ -74,6 +74,7 @@
         quantita integer not null,
         categoria_id bigint,
         produttore_id bigint,
+        taglia varchar(20),
         colore varchar(200),
         descrizione varchar(200) not null,
         primary key (product_code)
