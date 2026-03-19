@@ -8,9 +8,10 @@
         nazione varchar(30) not null,
         citta varchar(50) not null,
         cognome varchar(50) not null,
+        descrizione varchar(50) not null,
         nome varchar(50) not null,
         via varchar(100) not null,
-        utente_user_name varchar(255) unique,
+        utente_user_name varchar(255),
         primary key (id)
     );
 

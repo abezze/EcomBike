@@ -37,7 +37,7 @@ public class DettaglioOrdine {
 			)
 	private Prodotto prodotto;*/
     @ManyToOne
-    @JoinColumn(name = "prodotto_id") 
+    @JoinColumn(name = "prodotto_id")
     private Prodotto prodotto;
 
     

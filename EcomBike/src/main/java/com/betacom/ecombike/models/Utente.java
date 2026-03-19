@@ -28,11 +28,16 @@ public class Utente {
 	private String email;
 	private Roles role;
 	
+	
+	 @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Anagrafica> anagrafiche = new ArrayList<>();
+	 
+	/*
 	@OneToOne(
 			mappedBy = "utente",
 			cascade =  CascadeType.REMOVE
 			)
-	private Anagrafica anagrafica;
+	private Anagrafica anagrafica;*/
 	
 	@OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ordine> ordini = new ArrayList<>();

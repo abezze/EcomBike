@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -22,6 +23,9 @@ public class Anagrafica {
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private Long id;
+ 
+ @Column(name = "descrizione", nullable = false, length = 50)
+ private String descrizione;
  
  @Column(name = "nome", nullable = false, length = 50)
  private String nome;
@@ -49,12 +53,19 @@ public class Anagrafica {
  
  @Column(name = "partitaIva", nullable = true, length = 20)
  private String partitaIva;
-
+ 
+ 
+    @ManyToOne
+     @JoinColumn(name = "utente_userName") 
+     private Utente utente;
+  
+ 
+/*
  @OneToOne
 	@JoinColumn(
 			name="utente_userName",
 			referencedColumnName = "userName"
 			)
 	private Utente utente;
-
+*/
 }
