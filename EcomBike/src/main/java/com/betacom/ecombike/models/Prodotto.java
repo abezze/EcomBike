@@ -11,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +34,8 @@ public class Prodotto {
 	 
 	 private BigDecimal peso;
 	 
+	 private int quantita;
+	 
 	 
 	 @ManyToOne
      @JoinColumn(name = "categoria_id") 
@@ -49,5 +50,9 @@ public class Prodotto {
 	 
 	 @OneToMany(mappedBy = "prodotto", cascade = CascadeType.ALL, orphanRemoval = true)
 	    private List<DettaglioOrdine> dettagli = new ArrayList<>();
+	 
+	 @ManyToOne
+     @JoinColumn(name = "produttore_id") 
+     private Produttore produttore;
 
 }

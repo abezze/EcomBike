@@ -25,6 +25,9 @@
     alter table if exists prodotto 
        drop constraint if exists FKp54y50a2i7pdiipduc60tttrw;
 
+    alter table if exists prodotto 
+       drop constraint if exists FKakof6q73twbk4tk150ann5gg9;
+
     drop table if exists anagrafica cascade;
 
     drop table if exists categoria cascade;
@@ -40,6 +43,8 @@
     drop table if exists pagamento cascade;
 
     drop table if exists prodotto cascade;
+
+    drop table if exists produttore cascade;
 
     drop table if exists tipo_pagamento cascade;
 
