@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.betacom.ecombike.dto.inputs.AnagraficaReq;
 import com.betacom.ecombike.dto.outputs.AnagraficaDTO;
+import com.betacom.ecombike.enums.TipoIndirizzo;
 import com.betacom.ecombike.exceptions.EcomBikeException;
 import com.betacom.ecombike.models.Anagrafica;
 import com.betacom.ecombike.repositories.IAnagraficaRepository;
@@ -42,7 +43,7 @@ public class AnagraficaImpl implements IAnagraficaServices{
 		if (req.getCitta()== null)
 			throw new EcomBikeException("Città non caricato");
 		
-		if (req.getDescrizione()== null)
+		if (req.getTipoIndirizzo()== null)
 			throw new EcomBikeException("Descrizione non caricato");
 		
 		if (req.getNazione()== null)
@@ -68,7 +69,7 @@ public class AnagraficaImpl implements IAnagraficaServices{
 		anag.setPartitaIva(req.getPartitaIva());
 		anag.setTelefono(req.getTelefono());
 		anag.setVia(req.getVia());
-		anag.setDescrizione(req.getDescrizione());
+		anag.setTipoIndirizzo(TipoIndirizzo.valueOf(req.getTipoIndirizzo()));;
 		
 		anagR.save(anag);
 				

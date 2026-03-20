@@ -1,5 +1,8 @@
 package com.betacom.ecombike.controllers;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.betacom.ecombike.dto.inputs.AnagraficaReq;
+import com.betacom.ecombike.enums.TipoIndirizzo;
 import com.betacom.ecombike.response.Resp;
 import com.betacom.ecombike.services.interfaces.IAnagraficaServices;
 import com.betacom.ecombike.services.interfaces.IMessaggioServices;
@@ -96,6 +100,17 @@ public class AnagraficaController {
 			status = HttpStatus.BAD_REQUEST;
 		}
 		return ResponseEntity.status(status).body(r);
+		
+	}
+	
+	@GetMapping("/listTipoIndirizzo")
+	public ResponseEntity<Object> listTipoIndirizzo(){
+		
+		HttpStatus status = HttpStatus.OK;
+		
+			List<TipoIndirizzo> enumValues = Arrays.asList(TipoIndirizzo.values());
+		
+		return ResponseEntity.status(status).body(enumValues);
 		
 	}
 }

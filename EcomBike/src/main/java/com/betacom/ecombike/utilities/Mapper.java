@@ -26,7 +26,7 @@ public class Mapper {
 				.id(a.getId())
 				.nome(a.getNome())
 				.cognome(a.getCognome())
-				.descrizione(a.getDescrizione())
+				.tipoIndirizzo(a.getTipoIndirizzo().toString())
 				.codiceFiscale(a.getCodiceFiscale())
 				.partitaIva(a.getPartitaIva())
 				.citta(a.getCitta())

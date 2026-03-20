@@ -14,7 +14,7 @@ import lombok.ToString;
 public class AnagraficaDTO {
 
 	 private Long id;
-	 private String descrizione;
+	 private String tipoIndirizzo;
 	 private String nome;
 	 private String cognome;
 	 private String via;

@@ -1,5 +1,7 @@
 package com.betacom.ecombike.models;
 
+import com.betacom.ecombike.enums.TipoIndirizzo;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +26,7 @@ public class Anagrafica {
  private Long id;
  
  @Column(name = "descrizione", nullable = false, length = 50)
- private String descrizione;
+ private TipoIndirizzo tipoIndirizzo;
  
  @Column(name = "nome", nullable = false, length = 50)
  private String nome;
