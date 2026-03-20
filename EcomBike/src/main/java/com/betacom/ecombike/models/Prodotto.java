@@ -44,16 +44,16 @@ public class Prodotto {
      @JoinColumn(name = "categoria_id") 
      private Categoria categoria;
 	 
-	/* @OneToOne
+	@OneToOne
 		@JoinColumn(
 				name="idDettaglioOrdine",
 				referencedColumnName = "id"
 				)
-		private DettaglioOrdine dettaglioOrdine;*/
-	 
+		private DettaglioOrdine dettaglioOrdine;
+	 /*
 	 @OneToMany(mappedBy = "prodotto", cascade = CascadeType.ALL, orphanRemoval = true)
 	    private List<DettaglioOrdine> dettagli = new ArrayList<>();
-	 
+	 */
 	 @ManyToOne
      @JoinColumn(name = "produttore_id") 
      private Produttore produttore;
