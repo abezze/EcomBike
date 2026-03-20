@@ -25,7 +25,7 @@ public class Anagrafica {
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private Long id;
  
- @Column(name = "descrizione", nullable = false, length = 50)
+ @Column(name = "tipoIndirizzo", nullable = false, length = 50)
  private TipoIndirizzo tipoIndirizzo;
  
  @Column(name = "nome", nullable = false, length = 50)

@@ -1,5 +1,7 @@
 package com.betacom.ecombike.models;
 
+import com.betacom.ecombike.enums.TipoIndirizzo;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +30,9 @@ public class IndirizzoSpedizione {
  
  @Column(name = "cognome", nullable = false, length = 50)
  private String cognome;
+ 
+ @Column(name = "tipoIndirizzo", nullable = false, length = 50)
+ private TipoIndirizzo tipoIndirizzo;
 
  @Column(name = "via", nullable = false, length = 100)
  private String via;
