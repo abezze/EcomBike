@@ -40,19 +40,7 @@ public class Mapper {
 	
 	public static List<AnagraficaDTO> buildAnagraficaDTO(List<Anagrafica> lA) {
 		return lA.stream()
-				.map( a -> AnagraficaDTO.builder()
-				.id(a.getId())
-				.nome(a.getNome())
-				.cognome(a.getCognome())
-				.descrizione(a.getDescrizione())
-				.codiceFiscale(a.getCodiceFiscale())
-				.partitaIva(a.getPartitaIva())
-				.citta(a.getCitta())
-				.nazione(a.getNazione())
-				.cap(a.getCap())
-				.via(a.getVia())
-				.telefono(a.getTelefono())
-				.build())
+				.map( a -> buildAnagraficaDTO(a))
 				.collect(Collectors.toList());
 				
 	}
