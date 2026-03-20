@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.betacom.ecombike.dto.outputs.AnagraficaDTO;
+import com.betacom.ecombike.dto.outputs.OrdineDTO;
 import com.betacom.ecombike.dto.outputs.UtenteDTO;
 import com.betacom.ecombike.models.Anagrafica;
+import com.betacom.ecombike.models.Ordine;
 import com.betacom.ecombike.models.Utente;
 
 public class Mapper {
@@ -43,6 +45,27 @@ public class Mapper {
 				.map( a -> buildAnagraficaDTO(a))
 				.collect(Collectors.toList());
 				
+	}
+	
+	public static OrdineDTO buildOrdineDTO(Ordine o) {
+		return OrdineDTO.builder()
+				.dataOrdine(o.getDataOrdine())
+				.id(o.getId())
+				.orarioOrdine(o.getOrarioOrdine())
+				.statoOrdine(o.getStatoOrdine().toString())
+				.utente(buildUtenteDto(o.getUtente()))
+				//.indirizzo(null)
+				//.dettagli
+				//.pagamento
+				.build();
+				
+				
+	}
+	public static List<OrdineDTO> buildOrdineDTO(List<Ordine> lO) {
+		return lO.stream()
+				.map(o -> buildOrdineDTO(o))
+				.collect(Collectors.toList());
+		
 	}
 
 
