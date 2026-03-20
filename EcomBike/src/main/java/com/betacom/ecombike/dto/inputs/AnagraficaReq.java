@@ -10,6 +10,7 @@ import lombok.ToString;
 public class AnagraficaReq {
 	
 	 private Long id;
+	 private String descrizione;
 	 private String nome;
 	 private String cognome;
 	 private String via;

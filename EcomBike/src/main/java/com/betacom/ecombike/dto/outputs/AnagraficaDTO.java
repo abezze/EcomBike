@@ -2,7 +2,6 @@ package com.betacom.ecombike.dto.outputs;
 
 import com.betacom.ecombike.models.Utente;
 
-import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +14,7 @@ import lombok.ToString;
 public class AnagraficaDTO {
 
 	 private Long id;
+	 private String descrizione;
 	 private String nome;
 	 private String cognome;
 	 private String via;
