@@ -5,6 +5,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.betacom.ecombike.enums.StatoOrdine;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,6 +38,8 @@ public class Ordine {
 	
 	@Column (name="orario_ordine")
 	private LocalTime orarioOrdine;
+	
+	private StatoOrdine statoOrdine;
 
     @OneToOne(
 			mappedBy = "ordineIndirizzo",
