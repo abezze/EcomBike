@@ -6,6 +6,7 @@ import java.util.List;
 import com.betacom.ecombike.enums.Roles;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -22,8 +23,11 @@ import lombok.ToString;
 public class Utente {
 	
 	@Id
+	@Column(name = "userName", nullable = false, length = 20)
 	private String userName;
+	@Column(name = "password", nullable = false, length = 20)
 	private String password;
+	@Column(name = "email", nullable = false, length = 20)
 	private String email;
 	private Roles role;
 	

@@ -12,7 +12,9 @@ import com.betacom.ecombike.dto.outputs.AnagraficaDTO;
 import com.betacom.ecombike.enums.TipoIndirizzo;
 import com.betacom.ecombike.exceptions.EcomBikeException;
 import com.betacom.ecombike.models.Anagrafica;
+import com.betacom.ecombike.models.Utente;
 import com.betacom.ecombike.repositories.IAnagraficaRepository;
+import com.betacom.ecombike.repositories.IUtenteRepository;
 import com.betacom.ecombike.services.interfaces.IAnagraficaServices;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class AnagraficaImpl implements IAnagraficaServices{
 	private final IAnagraficaRepository anagR;
+	private final IUtenteRepository uteR;
 	
 	
 	@Transactional (rollbackFor = EcomBikeException.class)
@@ -58,6 +61,9 @@ public class AnagraficaImpl implements IAnagraficaServices{
 		if (req.getCodiceFiscale()== null && req.getPartitaIva()==null)
 			throw new EcomBikeException("Inserire almeno uno tra codice Fiscale e partita IVA");
 		
+		Utente ute = uteR.findById(req.getUserName())
+				.orElseThrow(() -> new EcomBikeException("Utente non trovato :" + req.getUserName()));
+		
 		
 		Anagrafica anag=  new Anagrafica();
 		anag.setNome(req.getNome());
@@ -69,7 +75,8 @@ public class AnagraficaImpl implements IAnagraficaServices{
 		anag.setPartitaIva(req.getPartitaIva());
 		anag.setTelefono(req.getTelefono());
 		anag.setVia(req.getVia());
-		anag.setTipoIndirizzo(TipoIndirizzo.valueOf(req.getTipoIndirizzo()));;
+		anag.setTipoIndirizzo(TipoIndirizzo.valueOf(req.getTipoIndirizzo()));
+		anag.setUtente(ute);
 		
 		anagR.save(anag);
 				

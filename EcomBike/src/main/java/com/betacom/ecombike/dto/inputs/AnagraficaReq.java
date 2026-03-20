@@ -20,5 +20,6 @@ public class AnagraficaReq {
 	 private String telefono;
 	 private String codiceFiscale;
 	 private String partitaIva;
+	 private String userName;
 
 }
