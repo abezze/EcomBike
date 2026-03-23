@@ -20,7 +20,7 @@ public class OrdineDTO {
 	private LocalTime orarioOrdine;
 	private String statoOrdine;
 	
-	//private IndirizzoSpedizioneDTO indirizzo;
+	private IndirizzoSpedizioneDTO indirizzo;
     private List<DettaglioOrdineDTO> dettagli ;
     private UtenteDTO utente;
 	private PagamentoDTO pagamento;

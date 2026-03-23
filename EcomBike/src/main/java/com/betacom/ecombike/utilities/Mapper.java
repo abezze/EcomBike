@@ -5,11 +5,13 @@ import java.util.stream.Collectors;
 
 import com.betacom.ecombike.dto.outputs.AnagraficaDTO;
 import com.betacom.ecombike.dto.outputs.CategoriaDTO;
+import com.betacom.ecombike.dto.outputs.IndirizzoSpedizioneDTO;
 import com.betacom.ecombike.dto.outputs.OrdineDTO;
 import com.betacom.ecombike.dto.outputs.ProduttoreDTO;
 import com.betacom.ecombike.dto.outputs.UtenteDTO;
 import com.betacom.ecombike.models.Anagrafica;
 import com.betacom.ecombike.models.Categoria;
+import com.betacom.ecombike.models.IndirizzoSpedizione;
 import com.betacom.ecombike.models.Ordine;
 import com.betacom.ecombike.models.Produttore;
 import com.betacom.ecombike.models.Utente;
@@ -30,6 +32,7 @@ public class Mapper {
 	public static AnagraficaDTO buildAnagraficaDTO(Anagrafica a) {
 		return AnagraficaDTO.builder()
 				.id(a.getId())
+				.utente(buildUtenteDto(a.getUtente()))
 				.nome(a.getNome())
 				.cognome(a.getCognome())
 				.tipoIndirizzo(a.getTipoIndirizzo().toString())
@@ -58,7 +61,7 @@ public class Mapper {
 				.orarioOrdine(o.getOrarioOrdine())
 				.statoOrdine(o.getStatoOrdine().toString())
 				.utente(buildUtenteDto(o.getUtente()))
-				//.indirizzo(null)
+				.indirizzo(buildIndirizzoSpedizioneDTO(o.getIndirizzo()))
 				//.dettagli
 				//.pagamento
 				.build();
@@ -100,6 +103,31 @@ public class Mapper {
 	public static List<CategoriaDTO> buildCategorieDTO(List<Categoria> lC) {
 		return lC.stream()
 				.map(c -> buildCategoriaDTO(c))
+				.collect(Collectors.toList());
+				
+	}
+	
+	public static IndirizzoSpedizioneDTO buildIndirizzoSpedizioneDTO(IndirizzoSpedizione a) {
+		return IndirizzoSpedizioneDTO.builder()
+				.id(a.getId())
+				//.ordineIndirizzo(buildOrdineDTO(a.getOrdineIndirizzo()))
+				.nome(a.getNome())
+				.cognome(a.getCognome())
+				.tipoIndirizzo(a.getTipoIndirizzo().toString())
+				.codiceFiscale(a.getCodiceFiscale())
+				.partitaIva(a.getPartitaIva())
+				.citta(a.getCitta())
+				.nazione(a.getNazione())
+				.cap(a.getCap())
+				.via(a.getVia())
+				.telefono(a.getTelefono())
+				.build();
+				
+	}
+	
+	public static List<IndirizzoSpedizioneDTO> buildIndirizzoSpedizioneDTO(List<IndirizzoSpedizione> lA) {
+		return lA.stream()
+				.map( a -> buildIndirizzoSpedizioneDTO(a))
 				.collect(Collectors.toList());
 				
 	}
