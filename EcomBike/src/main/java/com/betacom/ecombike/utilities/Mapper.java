@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.betacom.ecombike.dto.outputs.AnagraficaDTO;
 import com.betacom.ecombike.dto.outputs.CategoriaDTO;
+import com.betacom.ecombike.dto.outputs.DettaglioOrdineDTO;
 import com.betacom.ecombike.dto.outputs.IndirizzoSpedizioneDTO;
 import com.betacom.ecombike.dto.outputs.OrdineDTO;
 import com.betacom.ecombike.dto.outputs.PagamentoDTO;
@@ -13,6 +14,7 @@ import com.betacom.ecombike.dto.outputs.TipoPagamentoDTO;
 import com.betacom.ecombike.dto.outputs.UtenteDTO;
 import com.betacom.ecombike.models.Anagrafica;
 import com.betacom.ecombike.models.Categoria;
+import com.betacom.ecombike.models.DettaglioOrdine;
 import com.betacom.ecombike.models.IndirizzoSpedizione;
 import com.betacom.ecombike.models.Ordine;
 import com.betacom.ecombike.models.Pagamento;
@@ -193,6 +195,21 @@ public class Mapper {
 	public static List<TipoPagamentoDTO> buildTipoPagamentoDTO(List<TipoPagamento> lT){
 		return lT.stream()
 				.map(p-> buildTipoPagamentoDTO(p))
+				.collect(Collectors.toList());
+	}
+	
+	public static DettaglioOrdineDTO buildDettaglioOrdineDTO(DettaglioOrdine d) {
+		return DettaglioOrdineDTO.builder()
+				.id(d.getId())
+				.quantita(d.getQuantita())
+				.ordine(buildOrdineDTO(d.getOrdine()))
+				//.prodotto(buildProdottoDTO(d.getProdotto()))
+				.build();
+	}
+	
+	public static List<DettaglioOrdineDTO> buildDettaglioOrdineDTO(List<DettaglioOrdine> lD) {
+		return lD.stream()
+				.map(d -> buildDettaglioOrdineDTO(d) )
 				.collect(Collectors.toList());
 	}
 	

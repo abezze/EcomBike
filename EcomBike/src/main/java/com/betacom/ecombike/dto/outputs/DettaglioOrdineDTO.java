@@ -13,7 +13,7 @@ public class DettaglioOrdineDTO {
 
 	private Long id;
 	
-    private int quantita;
+    private Integer quantita;
 
     private OrdineDTO ordine;
     

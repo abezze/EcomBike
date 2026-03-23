@@ -11,7 +11,7 @@ public class DettaglioOrdineReq {
 	
 	private Long id;
 	
-    private int quantita;
+    private Integer quantita;
 
     private Long ordineId;
     

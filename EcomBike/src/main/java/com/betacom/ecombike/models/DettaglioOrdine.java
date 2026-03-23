@@ -1,6 +1,7 @@
 package com.betacom.ecombike.models;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +25,8 @@ public class DettaglioOrdine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int quantita;
+    @Column(name = "quantita", nullable = false)
+    private Integer quantita;
 
     
     @ManyToOne
