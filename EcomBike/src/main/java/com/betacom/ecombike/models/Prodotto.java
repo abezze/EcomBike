@@ -19,40 +19,35 @@ import lombok.ToString;
 @Entity
 @Table(name = "prodotto")
 public class Prodotto {
-	
-	 @Id
-	 private Integer productCode;
-	 
-	 @Column(name = "descrizione", nullable = false, length = 200)
-	 private String descrizione;
-	 
-	 @Column(name = "colore", nullable = true, length = 200)
-	 private String colore;
-	 
-	 private BigDecimal peso;
-	 
-	 private int quantita;
-	 
-	 @Column(name = "taglia", nullable = true, length = 20)
-	 private String taglia;
-	 
-	 
-	 @ManyToOne
-     @JoinColumn(name = "categoria_id") 
-     private Categoria categoria;
-	 
+
+	@Id
+	private Integer productCode;
+
+	@Column(name = "descrizione", nullable = false, length = 200)
+	private String descrizione;
+
+	@Column(name = "colore", nullable = true, length = 200)
+	private String colore;
+
+	@Column(nullable = false)
+	private BigDecimal peso;
+
+	@Column(nullable = false)
+	private Integer quantita;
+
+	@Column(name = "taglia", nullable = true, length = 20)
+	private String taglia;
+
+	@ManyToOne
+	@JoinColumn(name = "categoria_id")
+	private Categoria categoria;
+
 	@OneToOne
-		@JoinColumn(
-				name="idDettaglioOrdine",
-				referencedColumnName = "id"
-				)
-		private DettaglioOrdine dettaglioOrdine;
-	 /*
-	 @OneToMany(mappedBy = "prodotto", cascade = CascadeType.ALL, orphanRemoval = true)
-	    private List<DettaglioOrdine> dettagli = new ArrayList<>();
-	 */
-	 @ManyToOne
-     @JoinColumn(name = "produttore_id") 
-     private Produttore produttore;
+	@JoinColumn(name = "idDettaglioOrdine", referencedColumnName = "id")
+	private DettaglioOrdine dettaglioOrdine;
+
+	@ManyToOne
+	@JoinColumn(name = "produttore_id")
+	private Produttore produttore;
 
 }

@@ -35,10 +35,10 @@ public class ProduttoreImpl implements IProduttoreServices{
 		if (StringUtils.isBlank(req.getCodiceFiscale()) && StringUtils.isBlank(req.getPartitaIva()))
 			throw new EcomBikeException("Inserire almeno uno tra Codice Fiscale e Partita IVA");
 		
-		if (!AnagraficaUtils.isCodiceFiscaleValido(req.getCodiceFiscale()) && !AnagraficaUtils.isPartitaIvaValida(req.getCodiceFiscale()))
+		if (!StringUtils.isBlank(req.getCodiceFiscale()) && !AnagraficaUtils.isCodiceFiscaleValido(req.getCodiceFiscale()))
 			throw new EcomBikeException("Formato del Codice Fiscale non valido");
 		
-		if (!AnagraficaUtils.isPartitaIvaValida(req.getPartitaIva()))
+		if (!StringUtils.isBlank(req.getPartitaIva()) && !AnagraficaUtils.isPartitaIvaValida(req.getPartitaIva()))
 			throw new EcomBikeException("Formato della partita IVA non valido");
 	}
 

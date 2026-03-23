@@ -1,8 +1,7 @@
-package com.betacom.ecombike.dto.outputs;
+package com.betacom.ecombike.dto.inputs;
 
 import java.math.BigDecimal;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,9 +9,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Builder
-public class ProdottoDTO {
-
+public class ProdottoReq {
+	
 	private Integer productCode;
 
 	private String descrizione;
@@ -25,10 +23,10 @@ public class ProdottoDTO {
 
 	private String taglia;
 
-	private CategoriaDTO categoria;
+	private Long idCategoria;
 
-	private DettaglioOrdineDTO dettaglioOrdine;
+	private Long idDettaglioOrdine;
 
-	private ProduttoreDTO produttore;
+	private Long idProduttore;
 
 }

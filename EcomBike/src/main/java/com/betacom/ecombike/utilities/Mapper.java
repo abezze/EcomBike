@@ -9,6 +9,7 @@ import com.betacom.ecombike.dto.outputs.DettaglioOrdineDTO;
 import com.betacom.ecombike.dto.outputs.IndirizzoSpedizioneDTO;
 import com.betacom.ecombike.dto.outputs.OrdineDTO;
 import com.betacom.ecombike.dto.outputs.PagamentoDTO;
+import com.betacom.ecombike.dto.outputs.ProdottoDTO;
 import com.betacom.ecombike.dto.outputs.ProduttoreDTO;
 import com.betacom.ecombike.dto.outputs.TipoPagamentoDTO;
 import com.betacom.ecombike.dto.outputs.UtenteDTO;
@@ -18,7 +19,7 @@ import com.betacom.ecombike.models.DettaglioOrdine;
 import com.betacom.ecombike.models.IndirizzoSpedizione;
 import com.betacom.ecombike.models.Ordine;
 import com.betacom.ecombike.models.Pagamento;
-import com.betacom.ecombike.models.Pagamento;
+import com.betacom.ecombike.models.Prodotto;
 import com.betacom.ecombike.models.Produttore;
 import com.betacom.ecombike.models.TipoPagamento;
 import com.betacom.ecombike.models.Utente;
@@ -110,6 +111,7 @@ public class Mapper {
 	}
 
 	public static ProduttoreDTO buildProduttoreDTO(Produttore p) {
+		if (p == null) return null;
 		return ProduttoreDTO.builder()
 				.id(p.getId())
 				.marchio(p.getMarchio())
@@ -127,6 +129,7 @@ public class Mapper {
 	}
 
 	public static CategoriaDTO buildCategoriaDTO(Categoria c) {
+		if (c == null) return null;
 		return CategoriaDTO.builder()
 				.id(c.getId())
 				.descrizione(c.getDescrizione())
@@ -183,7 +186,6 @@ public class Mapper {
 				.collect(Collectors.toList());
 	}
 	
-	
 	public static TipoPagamentoDTO buildTipoPagamentoDTO(TipoPagamento t) {
 		return TipoPagamentoDTO.builder()
 				.id(t.getId())
@@ -199,6 +201,7 @@ public class Mapper {
 	}
 	
 	public static DettaglioOrdineDTO buildDettaglioOrdineDTO(DettaglioOrdine d) {
+		if (d == null) return null;
 		return DettaglioOrdineDTO.builder()
 				.id(d.getId())
 				.quantita(d.getQuantita())
@@ -213,6 +216,29 @@ public class Mapper {
 				.collect(Collectors.toList());
 	}
 	
+	public static ProdottoDTO buildProdottoDTO(Prodotto p) {
+		return ProdottoDTO.builder()
+				.productCode(p.getProductCode())
+				.descrizione(p.getDescrizione())
+				.colore(p.getColore())
+				.peso(p.getPeso())
+				.taglia(p.getTaglia())
+				.categoria(
+						buildCategoriaDTO(p.getCategoria())
+						)
+				.dettaglioOrdine(
+						buildDettaglioOrdineDTO(p.getDettaglioOrdine())
+						)
+				.produttore(
+						buildProduttoreDTO(p.getProduttore())
+						)
+				.build();
+	}
 	
+	public static List<ProdottoDTO> buildProdottiDTO(List<Prodotto> lP){
+		return lP.stream()
+				.map(p-> buildProdottoDTO(p))
+				.collect(Collectors.toList());
+	}
 
 }
