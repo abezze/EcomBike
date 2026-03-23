@@ -10,7 +10,7 @@ public interface IUtenteServices {
 	void create(UtenteReq req)throws Exception;
 	void update(UtenteReq req)throws Exception;
 	void delete(String userName)throws Exception;
-	List<UtenteDTO>list(); 
+	List<UtenteDTO>list() throws Exception; 
 	UtenteDTO getByUserName(String userName)throws Exception;
 
 }

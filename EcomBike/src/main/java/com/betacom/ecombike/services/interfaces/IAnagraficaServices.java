@@ -13,5 +13,5 @@ public interface IAnagraficaServices {
 	
 	AnagraficaDTO findById(Long id) throws Exception;
 	
-	List<AnagraficaDTO> list();
+	List<AnagraficaDTO> list() throws Exception;
 }

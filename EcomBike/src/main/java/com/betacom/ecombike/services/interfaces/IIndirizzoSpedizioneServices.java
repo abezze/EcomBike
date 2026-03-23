@@ -13,5 +13,5 @@ public interface IIndirizzoSpedizioneServices {
 	
 	IndirizzoSpedizioneDTO findById(Long id) throws Exception;
 	
-	List<IndirizzoSpedizioneDTO> list();
+	List<IndirizzoSpedizioneDTO> list() throws Exception;
 }

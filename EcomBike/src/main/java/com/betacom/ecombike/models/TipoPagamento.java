@@ -29,7 +29,7 @@ public class TipoPagamento {
 			name="tipo_pagamento",
 			nullable = false
 			)
-	private String tipo_pagamento;
+	private String tipoPagamento;
 	
 	@Column (
 			name="societa_creditrice",

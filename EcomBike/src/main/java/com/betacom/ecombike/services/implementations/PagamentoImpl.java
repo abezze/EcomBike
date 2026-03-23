@@ -90,7 +90,7 @@ public class PagamentoImpl implements IPagamentoServices{
 	}
 
 	@Override
-	public List<PagamentoDTO> list() {
+	public List<PagamentoDTO> list() throws Exception{
 		log.debug(" list Pagamento" );
 		
 		List<Pagamento> lU = pagR.findAll();

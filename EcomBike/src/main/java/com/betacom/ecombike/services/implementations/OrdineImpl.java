@@ -111,7 +111,7 @@ public class OrdineImpl implements IOrdineServices{
 	}
 
 	@Override
-	public List<OrdineDTO> list() {
+	public List<OrdineDTO> list() throws Exception{
 		log.debug(" list Ordine" );
 		
 		List<Ordine> lU = ordR.findAll();

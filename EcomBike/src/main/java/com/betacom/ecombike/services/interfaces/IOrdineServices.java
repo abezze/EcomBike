@@ -13,6 +13,6 @@ public interface IOrdineServices {
 	
 	OrdineDTO findById(Long id) throws Exception;
 	
-	List<OrdineDTO> list();
+	List<OrdineDTO> list() throws Exception;
 	void setPagamento(OrdineReq req) throws Exception;
 }

@@ -15,7 +15,7 @@ public class TipoPagamentoDTO {
 
 	private Long id;
 	
-	private String tipo_pagamento;
+	private String tipoPagamento;
 	
 	private String societaCreditrice;
 	

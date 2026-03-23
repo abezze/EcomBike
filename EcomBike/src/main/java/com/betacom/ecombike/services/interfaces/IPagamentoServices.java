@@ -13,5 +13,5 @@ public interface IPagamentoServices {
 	
 	PagamentoDTO findById(Long id) throws Exception;
 	
-	List<PagamentoDTO> list();
+	List<PagamentoDTO> list() throws Exception;
 }

@@ -134,7 +134,7 @@ public class IndirizzoSpedizioneImpl implements IIndirizzoSpedizioneServices{
 
 	
 	@Override
-	public List<IndirizzoSpedizioneDTO> list() {
+	public List<IndirizzoSpedizioneDTO> list() throws Exception{
 		log.debug("list");
 		List<IndirizzoSpedizione> lA = indirizzoR.findAll();
 		return buildIndirizzoSpedizioneDTO(lA);

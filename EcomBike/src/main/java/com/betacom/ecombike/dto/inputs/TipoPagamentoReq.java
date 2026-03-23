@@ -11,7 +11,7 @@ public class TipoPagamentoReq {
 	
 	private Long id;
 	
-	private String tipo_pagamento;
+	private String tipoPagamento;
 	
 	private String societaCreditrice;
 

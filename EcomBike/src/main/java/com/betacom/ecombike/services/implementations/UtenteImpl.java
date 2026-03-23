@@ -72,7 +72,7 @@ public class UtenteImpl implements IUtenteServices{
 	}
 
 	@Override
-	public List<UtenteDTO> list() {
+	public List<UtenteDTO> list() throws Exception{
 		log.debug(" list Utente" );
 		
 		List<Utente> lU = utR.findAll();

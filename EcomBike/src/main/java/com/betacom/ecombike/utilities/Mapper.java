@@ -186,7 +186,7 @@ public class Mapper {
 		return TipoPagamentoDTO.builder()
 				.id(t.getId())
 				.societaCreditrice(t.getSocietaCreditrice())
-				.tipo_pagamento(t.getTipo_pagamento())
+				.tipoPagamento(t.getTipoPagamento())
 				.build();
 	}
 	
