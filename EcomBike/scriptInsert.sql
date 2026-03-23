@@ -52,3 +52,15 @@ VALUES(3, 'Bici da Corsa');
 INSERT INTO categoria
 (id, descrizione)
 VALUES(4, 'Bici BMX');
+
+--------------------------------------
+
+INSERT INTO tipo_pagamento
+(id, societa_creditrice, tipo_pagamento)
+VALUES(1, 'Visa', 'Credit Card');
+INSERT INTO tipo_pagamento
+(id, societa_creditrice, tipo_pagamento)
+VALUES(2, 'Paypal Europe S.a.r.l', 'PayPal');
+INSERT INTO tipo_pagamento
+(id, societa_creditrice, tipo_pagamento)
+VALUES(3, 'ABI ', 'Bonifico Bancario');
