@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.betacom.ecombike.models.Produttore;
 
 @Repository
-public interface IProduttoreRepository extends JpaRepository<Produttore, Long>{
+public interface IProduttoreRepository extends JpaRepository<Produttore, Long> {
 
 }

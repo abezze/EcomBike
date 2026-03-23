@@ -21,23 +21,22 @@ import lombok.ToString;
 @Entity
 @Table(name = "produttore")
 public class Produttore {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-	
-	private String marchio; 
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private String marchio;
+
 	private String nomeAzienda;
-	
+
 	@Column(name = "codiceFiscale", nullable = true, length = 20)
-	 private String codiceFiscale;
-	 
-	 @Column(name = "partitaIva", nullable = true, length = 20)
-	 private String partitaIva;
-	
+	private String codiceFiscale;
+
+	@Column(name = "partitaIva", nullable = true, length = 20)
+	private String partitaIva;
+
 	@OneToMany(mappedBy = "produttore", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Prodotto> prodotti = new ArrayList<>();
-	
+	private List<Prodotto> prodotti = new ArrayList<>();
 
 }

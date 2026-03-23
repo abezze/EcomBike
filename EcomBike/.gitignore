@@ -31,7 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+###
 /define.sql
 /drop.sql
 /EcomBike.log
-/EcomBike.log.2026-03-19.0.gz
+/EcomBike.log.*.gz
