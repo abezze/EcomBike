@@ -5,9 +5,11 @@ import java.util.stream.Collectors;
 
 import com.betacom.ecombike.dto.outputs.AnagraficaDTO;
 import com.betacom.ecombike.dto.outputs.OrdineDTO;
+import com.betacom.ecombike.dto.outputs.ProduttoreDTO;
 import com.betacom.ecombike.dto.outputs.UtenteDTO;
 import com.betacom.ecombike.models.Anagrafica;
 import com.betacom.ecombike.models.Ordine;
+import com.betacom.ecombike.models.Produttore;
 import com.betacom.ecombike.models.Utente;
 
 public class Mapper {
@@ -61,6 +63,7 @@ public class Mapper {
 				
 				
 	}
+	
 	public static List<OrdineDTO> buildOrdineDTO(List<Ordine> lO) {
 		return lO.stream()
 				.map(o -> buildOrdineDTO(o))
@@ -68,5 +71,21 @@ public class Mapper {
 		
 	}
 
+	public static ProduttoreDTO buildProduttoreDTO(Produttore p) {
+		return ProduttoreDTO.builder()
+				.id(p.getId())
+				.marchio(p.getMarchio())
+				.nomeAzienda(p.getNomeAzienda())
+				.codiceFiscale(p.getCodiceFiscale())
+				.partitaIva(p.getPartitaIva())
+				.build();
+	}
+	
+	public static List<ProduttoreDTO> buildProduttoriDTO(List<Produttore> lP) {
+		return lP.stream()
+				.map(p -> buildProduttoreDTO(p))
+				.collect(Collectors.toList());
+				
+	}
 
 }
