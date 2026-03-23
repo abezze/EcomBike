@@ -93,6 +93,22 @@ public class AnagraficaImpl implements IAnagraficaServices{
 			at.setNome(req.getNome());
 		if (req.getCognome()!=null)
 			at.setCognome(req.getCognome());
+		if (req.getCap()!=null)
+			at.setCap(req.getCap());
+		if (req.getCitta()!=null)
+			at.setCitta(req.getCitta());
+		if (req.getCodiceFiscale()!=null)
+			at.setCodiceFiscale(req.getCodiceFiscale());
+		if (req.getNazione()!=null)
+			at.setNazione(req.getNazione());
+		if (req.getPartitaIva()!=null)
+			at.setPartitaIva(req.getPartitaIva());
+		if (req.getTelefono()!=null)
+			at.setTelefono(req.getTelefono());
+		if (req.getVia()!=null)
+			at.setVia(req.getVia());
+		if (req.getTipoIndirizzo()!=null)
+			at.setTipoIndirizzo(TipoIndirizzo.valueOf(req.getTipoIndirizzo()));
 		
 		
 		anagR.save(at);

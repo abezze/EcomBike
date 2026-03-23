@@ -26,7 +26,33 @@ public class Mapper {
 			    .password(u.getPassword())
 			    .role(u.getRole().toString())
 			    .email(u.getEmail())
+			    .anagrafiche(buildAnagraficaSenzaUtenteDTO(u.getAnagrafiche()))
 			    .build();
+	}
+	
+	public static AnagraficaDTO buildAnagraficaSenzaUtenteDTO(Anagrafica a) {
+		return AnagraficaDTO.builder()
+				.id(a.getId())
+				//.utente(buildUtenteDto(a.getUtente()))
+				.nome(a.getNome())
+				.cognome(a.getCognome())
+				.tipoIndirizzo(a.getTipoIndirizzo().toString())
+				.codiceFiscale(a.getCodiceFiscale())
+				.partitaIva(a.getPartitaIva())
+				.citta(a.getCitta())
+				.nazione(a.getNazione())
+				.cap(a.getCap())
+				.via(a.getVia())
+				.telefono(a.getTelefono())
+				.build();
+				
+	}
+	
+	public static List<AnagraficaDTO> buildAnagraficaSenzaUtenteDTO(List<Anagrafica> lA) {
+		return lA.stream()
+				.map( a -> buildAnagraficaSenzaUtenteDTO(a))
+				.collect(Collectors.toList());
+				
 	}
 	
 	public static AnagraficaDTO buildAnagraficaDTO(Anagrafica a) {

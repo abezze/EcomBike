@@ -2,6 +2,7 @@ package com.betacom.ecombike.services.implementations;
 
 import static com.betacom.ecombike.utilities.Mapper.buildIndirizzoSpedizioneDTO;
 
+import java.net.Authenticator.RequestorType;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -94,6 +95,23 @@ public class IndirizzoSpedizioneImpl implements IIndirizzoSpedizioneServices{
 			at.setNome(req.getNome());
 		if (req.getCognome()!=null)
 			at.setCognome(req.getCognome());
+		if (req.getCap()!=null)
+			at.setCap(req.getCap());
+		if (req.getCitta()!=null)
+			at.setCitta(req.getCitta());
+		if (req.getCodiceFiscale()!=null)
+			at.setCodiceFiscale(req.getCodiceFiscale());
+		if (req.getNazione()!=null)
+			at.setNazione(req.getNazione());
+		if (req.getPartitaIva()!=null)
+			at.setPartitaIva(req.getPartitaIva());
+		if (req.getTelefono()!=null)
+			at.setTelefono(req.getTelefono());
+		if (req.getVia()!=null)
+			at.setVia(req.getVia());
+		if (req.getTipoIndirizzo()!=null)
+			at.setTipoIndirizzo(TipoIndirizzo.valueOf(req.getTipoIndirizzo()));
+			
 		
 		
 		indirizzoR.save(at);
