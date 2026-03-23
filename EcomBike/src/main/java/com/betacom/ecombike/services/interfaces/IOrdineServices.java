@@ -14,4 +14,5 @@ public interface IOrdineServices {
 	OrdineDTO findById(Long id) throws Exception;
 	
 	List<OrdineDTO> list();
+	void setPagamento(OrdineReq req) throws Exception;
 }
