@@ -7,13 +7,18 @@ import com.betacom.ecombike.dto.outputs.AnagraficaDTO;
 import com.betacom.ecombike.dto.outputs.CategoriaDTO;
 import com.betacom.ecombike.dto.outputs.IndirizzoSpedizioneDTO;
 import com.betacom.ecombike.dto.outputs.OrdineDTO;
+import com.betacom.ecombike.dto.outputs.PagamentoDTO;
 import com.betacom.ecombike.dto.outputs.ProduttoreDTO;
+import com.betacom.ecombike.dto.outputs.TipoPagamentoDTO;
 import com.betacom.ecombike.dto.outputs.UtenteDTO;
 import com.betacom.ecombike.models.Anagrafica;
 import com.betacom.ecombike.models.Categoria;
 import com.betacom.ecombike.models.IndirizzoSpedizione;
 import com.betacom.ecombike.models.Ordine;
+import com.betacom.ecombike.models.Pagamento;
+import com.betacom.ecombike.models.Pagamento;
 import com.betacom.ecombike.models.Produttore;
+import com.betacom.ecombike.models.TipoPagamento;
 import com.betacom.ecombike.models.Utente;
 
 public class Mapper {
@@ -157,5 +162,40 @@ public class Mapper {
 				.collect(Collectors.toList());
 				
 	}
+	
+	public static PagamentoDTO buildPagamentoDTO(Pagamento p) {
+		return PagamentoDTO.builder()
+				.id(p.getId())
+				.amount(p.getAmount())
+				.dataPagamento(p.getDataPagamento())
+				.orarioPagamento(p.getOrarioPagamento())
+				.tipoPagamento(buildTipoPagamentoDTO(p.getTipoPagamento()))
+				.ordine(null)
+				.build();
+				
+	}
+	
+	public static List<PagamentoDTO> buildPagamentoDTO(List<Pagamento> lP) {
+		return lP.stream()
+				.map(p -> buildPagamentoDTO(p))
+				.collect(Collectors.toList());
+	}
+	
+	
+	public static TipoPagamentoDTO buildTipoPagamentoDTO(TipoPagamento t) {
+		return TipoPagamentoDTO.builder()
+				.id(t.getId())
+				.societaCreditrice(t.getSocietaCreditrice())
+				.tipo_pagamento(t.getTipo_pagamento())
+				.build();
+	}
+	
+	public static List<TipoPagamentoDTO> buildTipoPagamentoDTO(List<TipoPagamento> lT){
+		return lT.stream()
+				.map(p-> buildTipoPagamentoDTO(p))
+				.collect(Collectors.toList());
+	}
+	
+	
 
 }

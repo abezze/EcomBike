@@ -28,7 +28,7 @@ public class PagamentoDTO {
 	private BigDecimal amount;
 	private LocalDate dataPagamento;
 	private LocalTime orarioPagamento;
-	//private TipoPagamentoDTO tipoPagamento;
+	private TipoPagamentoDTO tipoPagamento;
 	private OrdineDTO ordine;
 
 }
