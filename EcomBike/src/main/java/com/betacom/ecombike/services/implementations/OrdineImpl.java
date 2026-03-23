@@ -70,11 +70,7 @@ public class OrdineImpl implements IOrdineServices{
     	log.debug("set pagamento {}", req);
 		
 		
-		Utente ute = uteR.findById(req.getUserName())
-				.orElseThrow(() -> new EcomBikeException("Utente non trovato :" + req.getUserName()));
 		
-		IndirizzoSpedizione ind = indSpedR.findById(req.getIndirizzoSpedizioneId())
-				.orElseThrow(() -> new EcomBikeException("Indirizzo spedizione non trovato : "+ req.getIndirizzoSpedizioneId()));
 		
 		Pagamento pag = pagamR.findById(req.getPagamentoId())
 				.orElseThrow(() -> new EcomBikeException("Pagamento non trovato : "+ req.getPagamentoId()));
@@ -84,11 +80,8 @@ public class OrdineImpl implements IOrdineServices{
 		ord.setDataOrdine(req.getDataOrdine());
 		ord.setOrarioOrdine(req.getOrarioOrdine());
 		ord.setStatoOrdine(StatoOrdine.PAGATO);
-		ord.setUtente(ute);
 		
-		ord.setIndirizzo(ind);
-		
-		ord.setIndirizzo(ind);
+		ord.setPagamento(pag);
 		
 		ordR.save(ord);
 	}
