@@ -21,8 +21,8 @@ public class OrdineDTO {
 	private String statoOrdine;
 	
 	//private IndirizzoSpedizioneDTO indirizzo;
-    //private List<DettaglioOrdineDTO> dettagli ;
+    private List<DettaglioOrdineDTO> dettagli ;
     private UtenteDTO utente;
-	//private PagamentoDTO pagamento;
+	private PagamentoDTO pagamento;
 
 }

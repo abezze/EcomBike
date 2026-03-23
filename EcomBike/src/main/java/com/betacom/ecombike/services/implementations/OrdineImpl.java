@@ -8,11 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.betacom.ecombike.dto.inputs.OrdineReq;
 import com.betacom.ecombike.dto.outputs.OrdineDTO;
-import com.betacom.ecombike.enums.Roles;
 import com.betacom.ecombike.enums.StatoOrdine;
 import com.betacom.ecombike.exceptions.EcomBikeException;
+import com.betacom.ecombike.models.IndirizzoSpedizione;
 import com.betacom.ecombike.models.Ordine;
 import com.betacom.ecombike.models.Utente;
+import com.betacom.ecombike.repositories.IIndirizzoSpedizioneRepository;
 import com.betacom.ecombike.repositories.IOrdineRepository;
 import com.betacom.ecombike.repositories.IUtenteRepository;
 import com.betacom.ecombike.services.interfaces.IMessaggioServices;
@@ -31,6 +32,7 @@ public class OrdineImpl implements IOrdineServices{
 	private final IOrdineRepository ordR;
 	private final IMessaggioServices msgS;
 	private final IUtenteRepository uteR;
+	private final IIndirizzoSpedizioneRepository indSpedR;
 
 
     
@@ -44,11 +46,16 @@ public class OrdineImpl implements IOrdineServices{
 		Utente ute = uteR.findById(req.getUserName())
 				.orElseThrow(() -> new EcomBikeException("Utente non trovato :" + req.getUserName()));
 		
+		IndirizzoSpedizione ind = indSpedR.findById(req.getIndirizzoSpedizioneId())
+				.orElseThrow(() -> new EcomBikeException("Indirizzo spedizione non trovato : "+ req.getIndirizzoSpedizioneId()));
+		
 		Ordine ord = new Ordine();
 		ord.setDataOrdine(req.getDataOrdine());
 		ord.setOrarioOrdine(req.getOrarioOrdine());
 		ord.setStatoOrdine(StatoOrdine.valueOf(req.getStatoOrdine()));
 		ord.setUtente(ute);
+		
+		ord.setIndirizzo(ind);
 		
 		ordR.save(ord);
 	}

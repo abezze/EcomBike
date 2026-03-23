@@ -1,8 +1,8 @@
-package com.betacom.ecombike.dto.outputs;
+package com.betacom.ecombike.dto.inputs;
 
-import com.betacom.ecombike.models.Utente;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,9 +10,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Builder
-public class AnagraficaDTO {
-
+public class IndirizzoSpedizioneReq {
+	
 	 private Long id;
 	 private String tipoIndirizzo;
 	 private String nome;
@@ -24,6 +23,6 @@ public class AnagraficaDTO {
 	 private String telefono;
 	 private String codiceFiscale;
 	 private String partitaIva;
-	 private Utente utente;
-	 
+	 private Long ordineId;
+
 }
