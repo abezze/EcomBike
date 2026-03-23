@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.betacom.ecombike.dto.outputs.AnagraficaDTO;
+import com.betacom.ecombike.dto.outputs.CategoriaDTO;
 import com.betacom.ecombike.dto.outputs.OrdineDTO;
 import com.betacom.ecombike.dto.outputs.ProduttoreDTO;
 import com.betacom.ecombike.dto.outputs.UtenteDTO;
 import com.betacom.ecombike.models.Anagrafica;
+import com.betacom.ecombike.models.Categoria;
 import com.betacom.ecombike.models.Ordine;
 import com.betacom.ecombike.models.Produttore;
 import com.betacom.ecombike.models.Utente;
@@ -84,6 +86,20 @@ public class Mapper {
 	public static List<ProduttoreDTO> buildProduttoriDTO(List<Produttore> lP) {
 		return lP.stream()
 				.map(p -> buildProduttoreDTO(p))
+				.collect(Collectors.toList());
+				
+	}
+
+	public static CategoriaDTO buildCategoriaDTO(Categoria c) {
+		return CategoriaDTO.builder()
+				.id(c.getId())
+				.descrizione(c.getDescrizione())
+				.build();
+	}
+	
+	public static List<CategoriaDTO> buildCategorieDTO(List<Categoria> lC) {
+		return lC.stream()
+				.map(c -> buildCategoriaDTO(c))
 				.collect(Collectors.toList());
 				
 	}
