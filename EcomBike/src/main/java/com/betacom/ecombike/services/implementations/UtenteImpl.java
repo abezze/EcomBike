@@ -4,7 +4,6 @@ import static com.betacom.ecombike.utilities.Mapper.buildUtenteDto;
 
 import java.util.List;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.betacom.ecombike.dto.inputs.UtenteReq;
