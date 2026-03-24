@@ -4,6 +4,7 @@ import static com.betacom.ecombike.utilities.Mapper.buildUtenteDto;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.betacom.ecombike.dto.inputs.UtenteReq;
@@ -27,7 +28,7 @@ public class UtenteImpl implements IUtenteServices{
 	
 	private final IUtenteRepository utR;
 	private final IMessaggioServices msgS;
-
+	//private final PasswordEncoder encoder;
 
     
 	
@@ -40,6 +41,12 @@ public class UtenteImpl implements IUtenteServices{
 			throw new EcomBikeException(msgS.get("user_exist"));
 		Utente ut = new Utente();
 		ut.setEmail(req.getEmail());
+		/*
+			acc.setPwd(encoder.encode(req.getPwd()));
+			ut.setPassword(encoder.encode(req.getPassword()));
+		 */
+		
+		
 		ut.setPassword(req.getPassword());
 		ut.setUserName(req.getUserName());
 		ut.setRole(Roles.valueOf(req.getRole()));
@@ -87,11 +94,33 @@ public class UtenteImpl implements IUtenteServices{
 	public UtenteDTO getByUserName(String userName) throws Exception {
 		log.debug("getByUserName   {}",userName);
 		
+		
 		Utente u = utR.findById(userName)
 				.orElseThrow(() -> new EcomBikeException("user_ntfnd"));
 		
 		
 		return buildUtenteDto(u);
 	}
+	/*
+	@Override
+	public LoginDTO login(LoginReq req) throws Exception{
+		
+		log.debug("login {}", req.getUserName());
+		Utente ut = utR.findById(req.getUserName())
+				.orElseThrow( () -> new AcademyException(msgS.get("login_invalid")));
+				
+		if (!ut.getPassword().equals(req.getPassword()))
+			throw new AcademyException("login_invalid");
+		
+		if (!encoder.matches(req.getPassword(), ut.getPassword()))
+			throw new AcademyException(msgS.get("login_invalid"));
+		
+		
+		return LoginDTO.builder()
+				.id(ut.getUserName())
+				.role(ut.getRole().toString())
+				.build();
+		
+	}*/
 
 }

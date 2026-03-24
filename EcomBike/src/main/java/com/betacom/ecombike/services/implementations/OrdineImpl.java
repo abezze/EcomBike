@@ -49,9 +49,13 @@ public class OrdineImpl implements IOrdineServices{
 		Utente ute = uteR.findById(req.getUserName())
 				.orElseThrow(() -> new EcomBikeException("Utente non trovato :" + req.getUserName()));
 		
-		IndirizzoSpedizione ind = indSpedR.findById(req.getIndirizzoSpedizioneId())
-				.orElseThrow(() -> new EcomBikeException("Indirizzo spedizione non trovato : "+ req.getIndirizzoSpedizioneId()));
+		IndirizzoSpedizione ind = null;
 		
+		if (req.getIndirizzoSpedizioneId()!=null) {
+		
+			ind = indSpedR.findById(req.getIndirizzoSpedizioneId())
+				.orElseThrow(() -> new EcomBikeException("Indirizzo spedizione non trovato : "+ req.getIndirizzoSpedizioneId()));
+		}
 		Ordine ord = new Ordine();
 		ord.setDataOrdine(req.getDataOrdine());
 		ord.setOrarioOrdine(req.getOrarioOrdine());
