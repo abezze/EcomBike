@@ -38,6 +38,25 @@ public class Mapper {
 			    .build();
 	}
 	
+	public static UtenteDTO buildUtenteSenzaAnagraficheDto(Utente u) {
+		return UtenteDTO.builder() 
+				.userName(u.getUserName())
+			    .password(u.getPassword())
+			    .role(u.getRole().toString())
+			    .email(u.getEmail())
+			    //.anagrafiche(buildAnagraficaSenzaUtenteDTO(u.getAnagrafiche()))
+			    .build();
+	}
+	
+	public static UtenteDTO buildUtenteSenzaAnagraficaDto(Utente u) {
+		return UtenteDTO.builder() 
+				.userName(u.getUserName())
+			    .password(u.getPassword())
+			    .role(u.getRole().toString())
+			    .email(u.getEmail())
+			    .build();
+	}
+	
 	public static AnagraficaDTO buildAnagraficaSenzaUtenteDTO(Anagrafica a) {
 		return AnagraficaDTO.builder()
 				.id(a.getId())
@@ -66,7 +85,7 @@ public class Mapper {
 	public static AnagraficaDTO buildAnagraficaDTO(Anagrafica a) {
 		return AnagraficaDTO.builder()
 				.id(a.getId())
-				.utente(buildUtenteDto(a.getUtente()))
+				.utente(buildUtenteSenzaAnagraficaDto(a.getUtente()))
 				.nome(a.getNome())
 				.cognome(a.getCognome())
 				.tipoIndirizzo(a.getTipoIndirizzo().toString())
@@ -94,12 +113,11 @@ public class Mapper {
 				.id(o.getId())
 				.orarioOrdine(o.getOrarioOrdine())
 				.statoOrdine(o.getStatoOrdine().toString())
-				.utente(buildUtenteDto(o.getUtente()))
-				.indirizzo(buildIndirizzoSpedizioneDTO(o.getIndirizzo()))
-				//.dettagli
-				//.pagamento
+				.utente(o.getUtente()!=null?buildUtenteSenzaAnagraficheDto(o.getUtente()): null)
+				.indirizzo(o.getIndirizzo()!=null? buildIndirizzoSpedizioneDTO(o.getIndirizzo()) : null)
+				.dettagli(o.getDettagli()!=null ? buildDettaglioOrdineSenzaOrdineDTO(o.getDettagli()):null)
+				.pagamento(o.getPagamento()!=null? buildPagamentoDTO(o.getPagamento()):null)
 				.build();
-				
 				
 	}
 	
@@ -208,6 +226,21 @@ public class Mapper {
 				.ordine(buildOrdineDTO(d.getOrdine()))
 				//.prodotto(buildProdottoDTO(d.getProdotto()))
 				.build();
+	}
+	public static DettaglioOrdineDTO buildDettaglioOrdineSenzaOrdineDTO(DettaglioOrdine d) {
+		if (d == null) return null;
+		return DettaglioOrdineDTO.builder()
+				.id(d.getId())
+				.quantita(d.getQuantita())
+				//.ordine(buildOrdineDTO(d.getOrdine()))
+				//.prodotto(buildProdottoDTO(d.getProdotto()))
+				.build();
+	}
+	
+	public static List<DettaglioOrdineDTO> buildDettaglioOrdineSenzaOrdineDTO(List<DettaglioOrdine> lD) {
+		return lD.stream()
+				.map(d -> buildDettaglioOrdineSenzaOrdineDTO(d) )
+				.collect(Collectors.toList());
 	}
 	
 	public static List<DettaglioOrdineDTO> buildDettaglioOrdineDTO(List<DettaglioOrdine> lD) {

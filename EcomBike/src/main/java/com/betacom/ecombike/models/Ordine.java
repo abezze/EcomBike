@@ -40,15 +40,22 @@ public class Ordine {
 	private LocalTime orarioOrdine;
 	
 	private StatoOrdine statoOrdine;
-
+/*
     @OneToOne(
 			mappedBy = "ordineIndirizzo",
 			cascade =  CascadeType.REMOVE
 			)
 	private IndirizzoSpedizione indirizzo;
+    */
     
+    @OneToOne
+	@JoinColumn(
+			name="ordine_indirizzo",
+			referencedColumnName = "id"
+			)
+    private IndirizzoSpedizione indirizzo;
+     
     
-
     
     @OneToMany(mappedBy = "ordine", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DettaglioOrdine> dettagli = new ArrayList<>();

@@ -32,12 +32,18 @@ public class DettaglioOrdine {
     @ManyToOne
     @JoinColumn(name = "ordine_id") 
     private Ordine ordine;
-    
+    /*
     @OneToOne(
 			mappedBy = "dettaglioOrdine",
 			cascade =  CascadeType.REMOVE
 			)
 	private Prodotto prodotto;
+    */
+     @OneToOne
+	@JoinColumn(name = "productCode", referencedColumnName = "productCode")
+     private Prodotto prodotto;
+     
+    
     /*
     @ManyToOne
     @JoinColumn(name = "prodotto_id")

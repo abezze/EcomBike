@@ -7,8 +7,11 @@
     alter table if exists dettaglio_ordine 
        drop constraint if exists FKg8p950u9hg0towv49etgqvfo2;
 
-    alter table if exists indirizzo_spedizione 
-       drop constraint if exists FKdgh66lk2x1vbnp6ca8kbjcvlq;
+    alter table if exists dettaglio_ordine 
+       drop constraint if exists FKcwlgl042qcmilyegnw7ub8x8t;
+
+    alter table if exists ordine 
+       drop constraint if exists FKcrisolundgacttiaf6wgerfya;
 
     alter table if exists ordine 
        drop constraint if exists FKdg320enjlk6khf1wx5x8o28qx;
@@ -21,9 +24,6 @@
 
     alter table if exists prodotto 
        drop constraint if exists FKp54y50a2i7pdiipduc60tttrw;
-
-    alter table if exists prodotto 
-       drop constraint if exists FK6c0w5h93inpchkwv7ep4gnv62;
 
     alter table if exists prodotto 
        drop constraint if exists FKakof6q73twbk4tk150ann5gg9;

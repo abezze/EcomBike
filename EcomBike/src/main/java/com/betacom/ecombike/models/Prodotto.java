@@ -2,6 +2,7 @@ package com.betacom.ecombike.models;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -41,13 +42,19 @@ public class Prodotto {
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
-
+/*
 	@OneToOne
 	@JoinColumn(name = "idDettaglioOrdine", referencedColumnName = "id")
 	private DettaglioOrdine dettaglioOrdine;
-
+*/
+	
+	 @OneToOne(
+			mappedBy = "prodotto",
+			cascade =  CascadeType.REMOVE
+			)
+	 private DettaglioOrdine dettaglioOrdine;
+	 
 	@ManyToOne
 	@JoinColumn(name = "produttore_id")
 	private Produttore produttore;
-
 }

@@ -2,6 +2,7 @@ package com.betacom.ecombike.models;
 
 import com.betacom.ecombike.enums.TipoIndirizzo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -54,13 +55,20 @@ public class IndirizzoSpedizione {
  
  @Column(name = "partitaIva", nullable = true, length = 20)
  private String partitaIva;
-
+/*
  @OneToOne
 	@JoinColumn(
 			name="ordine_indirizzo",
 			referencedColumnName = "id"
 			)
 	private Ordine ordineIndirizzo;
+ */
+  @OneToOne(
+			mappedBy = "indirizzo",
+			cascade =  CascadeType.REMOVE
+			)
+  private Ordine ordineIndirizzo;
+  
  
  
 
