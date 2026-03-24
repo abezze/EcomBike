@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.betacom.ecombike.dto.inputs.LoginReq;
 import com.betacom.ecombike.dto.inputs.UtenteReq;
 import com.betacom.ecombike.enums.Roles;
 import com.betacom.ecombike.response.Resp;
@@ -113,6 +114,21 @@ public class UtenteController {
 		
 		return ResponseEntity.status(status).body(enumValues);
 		
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<Object> login(@RequestBody(required = true)  LoginReq req){
+		Object r = new Object();
+		HttpStatus status = HttpStatus.OK;
+		try {
+			r = utS.login(req);
+			//r.setMsg(msgS.get("login_valid"));
+		} catch (Exception e) {
+			r= new Resp();
+			((Resp) r).setMsg(e.getMessage());
+			status = HttpStatus.BAD_REQUEST;
+		}
+		return ResponseEntity.status(status).body(r);		
 	}
 
 }

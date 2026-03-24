@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.betacom.ecombike.dto.inputs.LoginReq;
 import com.betacom.ecombike.dto.inputs.UtenteReq;
+import com.betacom.ecombike.dto.outputs.LoginDTO;
 import com.betacom.ecombike.dto.outputs.UtenteDTO;
 import com.betacom.ecombike.enums.Roles;
 import com.betacom.ecombike.exceptions.EcomBikeException;
@@ -100,26 +102,25 @@ public class UtenteImpl implements IUtenteServices{
 		
 		return buildUtenteDto(u);
 	}
-	/*
+	
 	@Override
 	public LoginDTO login(LoginReq req) throws Exception{
 		
 		log.debug("login {}", req.getUserName());
 		Utente ut = utR.findById(req.getUserName())
-				.orElseThrow( () -> new AcademyException(msgS.get("login_invalid")));
-				
+				.orElseThrow( () -> new EcomBikeException(msgS.get("login_invalid")));
 		if (!ut.getPassword().equals(req.getPassword()))
-			throw new AcademyException("login_invalid");
-		
+			throw new EcomBikeException("login_invalid");
+		/*
 		if (!encoder.matches(req.getPassword(), ut.getPassword()))
 			throw new AcademyException(msgS.get("login_invalid"));
-		
+		*/
 		
 		return LoginDTO.builder()
 				.id(ut.getUserName())
 				.role(ut.getRole().toString())
 				.build();
 		
-	}*/
+	}
 
 }
