@@ -224,7 +224,7 @@ public class Mapper {
 				.id(d.getId())
 				.quantita(d.getQuantita())
 				.ordine(buildOrdineDTO(d.getOrdine()))
-				//.prodotto(buildProdottoDTO(d.getProdotto()))
+				.prodotto(buildProdottoSenzaDettOrdineDTO(d.getProdotto()))
 				.build();
 	}
 	public static DettaglioOrdineDTO buildDettaglioOrdineSenzaOrdineDTO(DettaglioOrdine d) {
@@ -233,7 +233,7 @@ public class Mapper {
 				.id(d.getId())
 				.quantita(d.getQuantita())
 				//.ordine(buildOrdineDTO(d.getOrdine()))
-				//.prodotto(buildProdottoDTO(d.getProdotto()))
+				.prodotto(buildProdottoSenzaDettOrdineDTO(d.getProdotto()))
 				.build();
 	}
 	
@@ -256,14 +256,35 @@ public class Mapper {
 				.colore(p.getColore())
 				.peso(p.getPeso())
 				.taglia(p.getTaglia())
-				.categoria(
-						buildCategoriaDTO(p.getCategoria())
+				.quantita(p.getQuantita())
+				.categoria(p.getCategoria()!=null?
+						buildCategoriaDTO(p.getCategoria()): null
 						)
-				.dettaglioOrdine(
-						buildDettaglioOrdineDTO(p.getDettaglioOrdine())
+				.dettaglioOrdine(p.getDettaglioOrdine()!=null?
+						buildDettaglioOrdineDTO(p.getDettaglioOrdine()):null
 						)
-				.produttore(
-						buildProduttoreDTO(p.getProduttore())
+				.produttore(p.getProduttore()!=null?
+						buildProduttoreDTO(p.getProduttore()):null
+						)
+				.build();
+	}
+	
+	public static ProdottoDTO buildProdottoSenzaDettOrdineDTO(Prodotto p) {
+		return ProdottoDTO.builder()
+				.productCode(p.getProductCode())
+				.descrizione(p.getDescrizione())
+				.colore(p.getColore())
+				.peso(p.getPeso())
+				.taglia(p.getTaglia())
+				.quantita(p.getQuantita())
+				.categoria(p.getCategoria()!=null?
+						buildCategoriaDTO(p.getCategoria()): null
+						)
+				/*.dettaglioOrdine(p.getDettaglioOrdine()!=null?
+						buildDettaglioOrdineDTO(p.getDettaglioOrdine()):null
+						)*/
+				.produttore(p.getProduttore()!=null?
+						buildProduttoreDTO(p.getProduttore()):null
 						)
 				.build();
 	}

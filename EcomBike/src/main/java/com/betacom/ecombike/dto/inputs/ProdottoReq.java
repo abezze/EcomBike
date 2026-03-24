@@ -25,8 +25,6 @@ public class ProdottoReq {
 
 	private Long idCategoria;
 
-	private Long idDettaglioOrdine;
-
 	private Long idProduttore;
 
 }

@@ -51,12 +51,6 @@ public class ProdottoImpl implements IProdottoServices{
 					new EcomBikeException("Categoria non trovata : " + req.getIdCategoria())
 					));
 		
-		if (req.getIdDettaglioOrdine() != null)
-			prodotto.setDettaglioOrdine(dettaglioOrdineR.findById(req.getIdDettaglioOrdine())
-					.orElseThrow(() -> 
-					new EcomBikeException("DettaglioOrdine non trovato : " + req.getIdDettaglioOrdine())
-					));
-		
 		if (req.getIdProduttore() != null)
 			prodotto.setProduttore(produttoreR.findById(req.getIdProduttore())
 					.orElseThrow(() -> 

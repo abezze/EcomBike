@@ -1,6 +1,6 @@
 package com.betacom.ecombike.services.implementations;
 
-import static com.betacom.ecombike.utilities.Mapper.buildDettaglioOrdineDTO;
+import static com.betacom.ecombike.utilities.Mapper.buildDettaglioOrdineSenzaOrdineDTO;
 
 import java.util.List;
 
@@ -11,7 +11,6 @@ import com.betacom.ecombike.dto.outputs.DettaglioOrdineDTO;
 import com.betacom.ecombike.exceptions.EcomBikeException;
 import com.betacom.ecombike.models.DettaglioOrdine;
 import com.betacom.ecombike.models.Ordine;
-import com.betacom.ecombike.models.Pagamento;
 import com.betacom.ecombike.models.Prodotto;
 import com.betacom.ecombike.repositories.IDettaglioOrdineRepository;
 import com.betacom.ecombike.repositories.IOrdineRepository;
@@ -41,12 +40,17 @@ public class DettaglioOrdineImpl implements IDettaglioOrdineServices{
 	
 		log.debug("create {}", req);
 		
-		Ordine ord = ordR.findById(req.getOrdineId())
+		Ordine ord = null;
+		if (req.getOrdineId()!=null) {
+			ord = ordR.findById(req.getOrdineId())
 				.orElseThrow(() -> new EcomBikeException("Ordine non trovato :" + req.getOrdineId()));
-				
-		Prodotto prodotto = prodR.findByProductCode(req.getProdottoId())
-				.orElseThrow(() -> new EcomBikeException("Prodotto non trovato :" + req.getProdottoId()));
+		}
 		
+		Prodotto prodotto = null;
+		if (req.getProdottoId()!=null) {
+			prodotto = prodR.findByProductCode(req.getProdottoId())
+				.orElseThrow(() -> new EcomBikeException("Prodotto non trovato :" + req.getProdottoId()));
+		}
 		
 		DettaglioOrdine dett = new DettaglioOrdine();
 		dett.setQuantita(req.getQuantita());
@@ -87,7 +91,7 @@ public class DettaglioOrdineImpl implements IDettaglioOrdineServices{
 		List<DettaglioOrdine> lU = dettR.findAll();
 		
 		
-		return  buildDettaglioOrdineDTO(lU);
+		return  buildDettaglioOrdineSenzaOrdineDTO(lU);
 	}
 
 	@Override
@@ -98,7 +102,7 @@ public class DettaglioOrdineImpl implements IDettaglioOrdineServices{
 				.orElseThrow(() -> new EcomBikeException("user_ntfnd"));
 		
 		
-		return buildDettaglioOrdineDTO(u);
+		return buildDettaglioOrdineSenzaOrdineDTO(u);
 	}
 
 }
