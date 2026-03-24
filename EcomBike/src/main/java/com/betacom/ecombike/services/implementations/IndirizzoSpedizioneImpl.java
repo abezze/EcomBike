@@ -2,9 +2,9 @@ package com.betacom.ecombike.services.implementations;
 
 import static com.betacom.ecombike.utilities.Mapper.buildIndirizzoSpedizioneDTO;
 
-import java.net.Authenticator.RequestorType;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,7 +48,7 @@ public class IndirizzoSpedizioneImpl implements IIndirizzoSpedizioneServices{
 			throw new EcomBikeException("Città non caricato");
 		
 		if (req.getTipoIndirizzo()== null)
-			throw new EcomBikeException("Descrizione non caricato");
+			throw new EcomBikeException("Tipo di indirizzo non caricato");
 		
 		if (req.getNazione()== null)
 			throw new EcomBikeException("Nazione non caricato");
@@ -59,7 +59,7 @@ public class IndirizzoSpedizioneImpl implements IIndirizzoSpedizioneServices{
 		if (req.getVia()== null)
 			throw new EcomBikeException("Via non caricato");
 		
-		if (req.getCodiceFiscale()== null && req.getPartitaIva()==null)
+		if (StringUtils.isBlank(req.getCodiceFiscale()) && StringUtils.isBlank(req.getPartitaIva()))
 			throw new EcomBikeException("Inserire almeno uno tra codice Fiscale e partita IVA");
 		
 		Ordine ord = uteR.findById(req.getOrdineId())

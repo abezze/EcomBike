@@ -10,10 +10,12 @@ import com.betacom.ecombike.dto.inputs.OrdineReq;
 import com.betacom.ecombike.dto.outputs.OrdineDTO;
 import com.betacom.ecombike.enums.StatoOrdine;
 import com.betacom.ecombike.exceptions.EcomBikeException;
+import com.betacom.ecombike.models.DettaglioOrdine;
 import com.betacom.ecombike.models.IndirizzoSpedizione;
 import com.betacom.ecombike.models.Ordine;
 import com.betacom.ecombike.models.Pagamento;
 import com.betacom.ecombike.models.Utente;
+import com.betacom.ecombike.repositories.IDettaglioOrdineRepository;
 import com.betacom.ecombike.repositories.IIndirizzoSpedizioneRepository;
 import com.betacom.ecombike.repositories.IOrdineRepository;
 import com.betacom.ecombike.repositories.IPagamentoRepository;
@@ -36,6 +38,7 @@ public class OrdineImpl implements IOrdineServices{
 	private final IUtenteRepository uteR;
 	private final IIndirizzoSpedizioneRepository indSpedR;
 	private final IPagamentoRepository pagamR;
+	private final IDettaglioOrdineRepository dettOrdR;
 
 
     
@@ -52,10 +55,10 @@ public class OrdineImpl implements IOrdineServices{
 		IndirizzoSpedizione ind = null;
 		
 		if (req.getIndirizzoSpedizioneId()!=null) {
-		
 			ind = indSpedR.findById(req.getIndirizzoSpedizioneId())
 				.orElseThrow(() -> new EcomBikeException("Indirizzo spedizione non trovato : "+ req.getIndirizzoSpedizioneId()));
 		}
+		
 		Ordine ord = new Ordine();
 		ord.setDataOrdine(req.getDataOrdine());
 		ord.setOrarioOrdine(req.getOrarioOrdine());
@@ -73,14 +76,12 @@ public class OrdineImpl implements IOrdineServices{
 	
     	log.debug("set pagamento {}", req);
 		
-		
-		
+    	Ordine ord = ordR.findById(req.getId())
+				.orElseThrow(() -> new EcomBikeException("Ordine non trovato : "+ req.getId()));
 		
 		Pagamento pag = pagamR.findById(req.getPagamentoId())
 				.orElseThrow(() -> new EcomBikeException("Pagamento non trovato : "+ req.getPagamentoId()));
-				
 		
-		Ordine ord = new Ordine();
 		ord.setDataOrdine(req.getDataOrdine());
 		ord.setOrarioOrdine(req.getOrarioOrdine());
 		ord.setStatoOrdine(StatoOrdine.PAGATO);
@@ -108,10 +109,18 @@ public class OrdineImpl implements IOrdineServices{
 	@Override
 	public void delete(Long id) throws Exception {
 		log.debug("delete {}", id);
-		Ordine ut = ordR.findById(id)
+		Ordine ord = ordR.findById(id)
 				.orElseThrow( () -> new EcomBikeException(msgS.get("user_nt_fnd")));
 		
-		ordR.delete(ut);
+		for (DettaglioOrdine dettOrd : ord.getDettagli()) {
+			dettOrdR.delete(dettOrd);
+		}
+		
+		if (ord.getIndirizzo() != null) {
+			indSpedR.delete(ord.getIndirizzo());
+		}
+		
+		ordR.delete(ord);
 	}
 
 	@Override
@@ -133,6 +142,24 @@ public class OrdineImpl implements IOrdineServices{
 		
 		
 		return buildOrdineDTO(u);
+	}
+	
+	@Override
+	public void setIndirizzoSpedizione(OrdineReq req) throws Exception {
+    	log.debug("setIndirizzoSpedizione {}", req);
+		
+    	Ordine ord = ordR.findById(req.getId())
+				.orElseThrow(() -> new EcomBikeException("Ordine non trovato : "+ req.getId()));
+    	
+    	IndirizzoSpedizione indSped = null;
+    	if (req.getIndirizzoSpedizioneId() != null) {
+	    	indSped = indSpedR.findById(req.getIndirizzoSpedizioneId())
+					.orElseThrow(() -> new EcomBikeException("Indirizzo di spedizione non trovato: "+ req.getIndirizzoSpedizioneId()));
+    	}
+    	
+    	ord.setIndirizzo(indSped);
+		
+		ordR.save(ord);
 	}
 
 }

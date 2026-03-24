@@ -102,8 +102,6 @@ public class OrdineController {
 		return ResponseEntity.status(status).body(r);		
 	}
 
-	
-
 	@GetMapping("/list")
 	public ResponseEntity<Object> list(){
 		Object r = new Object();
@@ -117,6 +115,7 @@ public class OrdineController {
 		return ResponseEntity.status(status).body(r);
 		
 	}
+	
 	@GetMapping("/findById")
 	public ResponseEntity<Object> findById (@RequestParam (required = true)  Long id){
 		Object r = new Object();
@@ -129,6 +128,20 @@ public class OrdineController {
 		}
 		return ResponseEntity.status(status).body(r);
 		
+	}
+
+	@PutMapping("/setIndirizzoSpedizione")
+	public ResponseEntity<Resp> setIndirizzoSpedizione(@RequestBody(required = true)  OrdineReq req){
+		Resp r = new Resp();
+		HttpStatus status = HttpStatus.OK;
+		try {
+			ordS.setIndirizzoSpedizione(req);
+			r.setMsg(msgS.get("rest_updated"));
+		} catch (Exception e) {
+			r.setMsg(e.getMessage());
+			status = HttpStatus.BAD_REQUEST;
+		}
+		return ResponseEntity.status(status).body(r);		
 	}
 
 }
