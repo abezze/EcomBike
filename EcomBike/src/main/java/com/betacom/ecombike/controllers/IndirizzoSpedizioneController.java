@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,8 @@ public class IndirizzoSpedizioneController {
 	
 	private final IMessaggioServices    msgS;
 	private final IIndirizzoSpedizioneServices    indirizzoSpedizioneServices;
+	
+	@PostMapping("/create")
 	public ResponseEntity<Resp> create(@RequestBody(required = true)  IndirizzoSpedizioneReq req){
 		Resp r = new Resp();
 		HttpStatus status = HttpStatus.OK;
