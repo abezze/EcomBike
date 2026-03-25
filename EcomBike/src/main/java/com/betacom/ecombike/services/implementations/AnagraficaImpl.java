@@ -3,12 +3,14 @@ package com.betacom.ecombike.services.implementations;
 import static com.betacom.ecombike.utilities.Mapper.buildAnagraficaDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.betacom.ecombike.dto.inputs.AnagraficaReq;
 import com.betacom.ecombike.dto.outputs.AnagraficaDTO;
+import com.betacom.ecombike.enums.Roles;
 import com.betacom.ecombike.enums.TipoIndirizzo;
 import com.betacom.ecombike.exceptions.EcomBikeException;
 import com.betacom.ecombike.models.Anagrafica;
@@ -47,7 +49,7 @@ public class AnagraficaImpl implements IAnagraficaServices{
 			throw new EcomBikeException("Città non caricato");
 		
 		if (req.getTipoIndirizzo()== null)
-			throw new EcomBikeException("Descrizione non caricato");
+			throw new EcomBikeException("Tipo Indirizzo non caricato");
 		
 		if (req.getNazione()== null)
 			throw new EcomBikeException("Nazione non caricato");
@@ -61,8 +63,29 @@ public class AnagraficaImpl implements IAnagraficaServices{
 		if (req.getCodiceFiscale()== null && req.getPartitaIva()==null)
 			throw new EcomBikeException("Inserire almeno uno tra codice Fiscale e partita IVA");
 		
-		Utente ute = uteR.findById(req.getUserName())
-				.orElseThrow(() -> new EcomBikeException("Utente non trovato :" + req.getUserName()));
+		Optional<Utente> optional = uteR.findById(req.getUserName());
+		
+		Utente ute = null;
+		
+		if (optional.isPresent()) {
+			ute = optional.get();
+			ute.setEmail(req.getEmail());
+			ute.setPassword(req.getPassword());
+		}
+		else {
+			ute = new Utente();
+			ute.setEmail(req.getEmail());
+			ute.setPassword(req.getPassword());
+			ute.setRole(Roles.valueOf(req.getRole()));
+			ute.setUserName(req.getUserName());
+		}	
+		Utente save = uteR.save(ute);
+		if (save!=null)
+			ute=save;
+			
+		
+		
+				//.orElseThrow(() -> new EcomBikeException("Utente non trovato :" + req.getUserName()));
 		
 		
 		Anagrafica anag=  new Anagrafica();
