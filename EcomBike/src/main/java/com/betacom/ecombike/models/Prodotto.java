@@ -38,6 +38,8 @@ public class Prodotto {
 
 	@Column(name = "taglia", nullable = true, length = 20)
 	private String taglia;
+	
+	private String image;
 
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")

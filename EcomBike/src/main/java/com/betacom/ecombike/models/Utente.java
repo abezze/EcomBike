@@ -23,11 +23,11 @@ import lombok.ToString;
 public class Utente {
 	
 	@Id
-	@Column(name = "userName", nullable = false, length = 20)
+	@Column(name = "userName", nullable = false, length = 40)
 	private String userName;
-	@Column(name = "password", nullable = false, length = 20)
+	@Column(name = "password", nullable = false, length = 40)
 	private String password;
-	@Column(name = "email", nullable = false, length = 20)
+	@Column(name = "email", nullable = false, length = 50)
 	private String email;
 	private Roles role;
 	

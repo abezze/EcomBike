@@ -1,5 +1,8 @@
 package com.betacom.ecombike.utilities;
 
+import static com.betacom.ecombike.utilities.Mapper.buildCategoriaDTO;
+import static com.betacom.ecombike.utilities.Mapper.buildProduttoreDTO;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +26,7 @@ import com.betacom.ecombike.models.Prodotto;
 import com.betacom.ecombike.models.Produttore;
 import com.betacom.ecombike.models.TipoPagamento;
 import com.betacom.ecombike.models.Utente;
+
 
 public class Mapper {
 
@@ -248,27 +252,6 @@ public class Mapper {
 				.map(d -> buildDettaglioOrdineDTO(d) )
 				.collect(Collectors.toList());
 	}
-	
-	public static ProdottoDTO buildProdottoDTO(Prodotto p) {
-		return ProdottoDTO.builder()
-				.productCode(p.getProductCode())
-				.descrizione(p.getDescrizione())
-				.colore(p.getColore())
-				.peso(p.getPeso())
-				.taglia(p.getTaglia())
-				.quantita(p.getQuantita())
-				.categoria(p.getCategoria()!=null?
-						buildCategoriaDTO(p.getCategoria()): null
-						)
-				.dettaglioOrdine(p.getDettaglioOrdine()!=null?
-						buildDettaglioOrdineDTO(p.getDettaglioOrdine()):null
-						)
-				.produttore(p.getProduttore()!=null?
-						buildProduttoreDTO(p.getProduttore()):null
-						)
-				.build();
-	}
-	
 	public static ProdottoDTO buildProdottoSenzaDettOrdineDTO(Prodotto p) {
 		return ProdottoDTO.builder()
 				.productCode(p.getProductCode())
@@ -276,6 +259,7 @@ public class Mapper {
 				.colore(p.getColore())
 				.peso(p.getPeso())
 				.taglia(p.getTaglia())
+				//.image(uplS.buildUrl(p.getImage()))
 				.quantita(p.getQuantita())
 				.categoria(p.getCategoria()!=null?
 						buildCategoriaDTO(p.getCategoria()): null
@@ -289,10 +273,5 @@ public class Mapper {
 				.build();
 	}
 	
-	public static List<ProdottoDTO> buildProdottiDTO(List<Prodotto> lP){
-		return lP.stream()
-				.map(p-> buildProdottoDTO(p))
-				.collect(Collectors.toList());
-	}
-
+	
 }

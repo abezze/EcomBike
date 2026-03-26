@@ -16,6 +16,7 @@ import com.betacom.ecombike.repositories.IProdottoRepository;
 import com.betacom.ecombike.repositories.IProduttoreRepository;
 import com.betacom.ecombike.services.interfaces.IProdottoServices;
 import com.betacom.ecombike.utilities.Mapper;
+import com.betacom.ecombike.utilities.ProdottoMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +28,9 @@ public class ProdottoImpl implements IProdottoServices{
 	
 	private final IProdottoRepository prodottoR;
 	private final ICategoriaRepository categoriaR;
-	private final IDettaglioOrdineRepository dettaglioOrdineR;
 	private final IProduttoreRepository produttoreR;
+	
+	private final ProdottoMapper prodM;
 	
 	private void checkProdotto(ProdottoReq req) {
 		if (StringUtils.isBlank(req.getDescrizione()))
@@ -103,14 +105,14 @@ public class ProdottoImpl implements IProdottoServices{
 		Prodotto prodotto = prodottoR.findById(productCode)
 				.orElseThrow(() -> new EcomBikeException("Prodotto non trovato: " + productCode));
 		
-		return Mapper.buildProdottoDTO(prodotto);
+		return prodM.buildProdottoDTO(prodotto);
 	}
 
 	@Override
 	public List<ProdottoDTO> list() {
 		log.debug("list");
 		List<Prodotto> produttori = prodottoR.findAll();
-		return Mapper.buildProdottiDTO(produttori);
+		return prodM.buildProdottiDTO(produttori);
 	}
 
 }
