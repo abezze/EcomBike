@@ -20,6 +20,7 @@ import com.betacom.ecombike.dto.inputs.UtenteChangePwdReq;
 import com.betacom.ecombike.dto.inputs.UtenteReq;
 import com.betacom.ecombike.dto.outputs.UtenteDTO;
 import com.betacom.ecombike.enums.Roles;
+import com.betacom.ecombike.exceptions.EcomBikeException;
 import com.betacom.ecombike.response.Resp;
 import com.betacom.ecombike.services.interfaces.IMessaggioServices;
 import com.betacom.ecombike.services.interfaces.IUtenteServices;
@@ -137,26 +138,33 @@ public class UtenteController {
 	public ResponseEntity<Resp> changePwd(@RequestBody(required = true)  UtenteChangePwdReq req){
 		Resp r = new Resp();
 		Object old = new Object();
+		boolean updated=false;
 		HttpStatus status = HttpStatus.OK;
 		try {
-			old= utS.getByUserName(req.getUserName());
-			if (old!=null) {
-				if (old instanceof UtenteDTO) {
-					UtenteDTO newUser = (UtenteDTO) old;
-					UtenteReq uReq = new UtenteReq();
-					if (newUser.getPassword().equals(req.getOldPwd())) {
-						uReq.setPassword(req.getNewPwd());
-						uReq.setUserName(req.getUserName());
-						utS.update(uReq);
-						r.setMsg(msgS.get("rest_updated"));
-					} else r.setMsg("Not Updated, wrong old password");
-					
+			if(!req.getNewPwd().equals(req.getOldPwd())) {
+				
+				old= utS.getByUserName(req.getUserName());
+				if (old!=null) {
+					if (old instanceof UtenteDTO) {
+						UtenteDTO newUser = (UtenteDTO) old;
+						UtenteReq uReq = new UtenteReq();
+						if (newUser.getPassword().equals(req.getOldPwd())) {
+							uReq.setPassword(req.getNewPwd());
+							uReq.setUserName(req.getUserName());
+							utS.update(uReq);
+							r.setMsg(msgS.get("rest_updated"));
+							updated = true;
+						} else r.setMsg("Not Updated, wrong old password");
+						
+						
+					} else r.setMsg("Not Updated,user not found");
 					
 				} else r.setMsg("Not Updated,user not found");
-				
-			} else r.setMsg("Not Updated,user not found");
+			} else r.setMsg("Not Updated,  old password equal to new one");
 			
 			log.debug("changePwd   {}",r.getMsg());
+			if (!updated)
+				throw new EcomBikeException(r.getMsg());
 			
 		} catch (Exception e) {
 			log.debug("Error:" + e.getMessage());
