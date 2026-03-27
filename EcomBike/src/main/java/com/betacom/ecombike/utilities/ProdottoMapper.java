@@ -33,9 +33,9 @@ public class ProdottoMapper {
 				.categoria(p.getCategoria()!=null?
 						buildCategoriaDTO(p.getCategoria()): null
 						)
-				.dettaglioOrdine(p.getDettaglioOrdine()!=null?
+				/*.dettaglioOrdine(p.getDettaglioOrdine()!=null?
 						buildDettaglioOrdineSenzaOrdineDTO(p.getDettaglioOrdine()):null
-						)
+						)*/
 				.produttore(p.getProduttore()!=null?
 						buildProduttoreDTO(p.getProduttore()):null
 						)
