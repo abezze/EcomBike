@@ -114,5 +114,13 @@ public class ProdottoImpl implements IProdottoServices{
 		List<Prodotto> produttori = prodottoR.findAll();
 		return prodM.buildProdottiDTO(produttori);
 	}
+	
+	@Override
+	public List<ProdottoDTO> find(Long categoria, Long produttore) throws Exception {
+		log.debug("find {} / {} ", categoria, produttore);
+		List<Prodotto> lS = prodottoR.searchByFilter(categoria, produttore);
+
+		return prodM.buildProdottiDTO(lS);
+	}
 
 }

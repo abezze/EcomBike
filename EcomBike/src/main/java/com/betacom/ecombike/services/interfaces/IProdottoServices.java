@@ -17,4 +17,6 @@ public interface IProdottoServices {
 
 	ProdottoDTO findByProductCode(Integer productCode) throws Exception;
 
+	List<ProdottoDTO> find(Long categoria, Long produttore) throws Exception;
+
 }

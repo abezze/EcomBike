@@ -70,11 +70,14 @@ public class ProdottoController {
 	}
 
 	@GetMapping("/list")
-	public ResponseEntity<Object> list(){
+	public ResponseEntity<Object> list(
+			@RequestParam (required = false)  Long categoria,
+			@RequestParam (required = false)  Long produttore
+			){
 		Object r = new Object();
 		HttpStatus status = HttpStatus.OK;
 		try {
-			r= prodottoServices.list();
+			r= prodottoServices.find(categoria, produttore);
 		} catch (Exception e) {
 			r=e.getMessage();
 			status = HttpStatus.BAD_REQUEST;
