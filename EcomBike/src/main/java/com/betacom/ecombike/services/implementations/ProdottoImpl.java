@@ -84,7 +84,29 @@ public class ProdottoImpl implements IProdottoServices{
 		Prodotto prodotto = prodottoR.findById(req.getProductCode())
 				.orElseThrow(() -> new EcomBikeException("Prodotto non trovato"));
 		
-		initializeProdotto(req, prodotto);
+		if (req.getDescrizione()!=null)
+			prodotto.setDescrizione(req.getDescrizione());
+		if (req.getColore()!=null)
+			prodotto.setColore(req.getColore());
+		if (req.getPeso()!=null)
+			prodotto.setPeso(req.getPeso());
+		if (req.getQuantita()!=null)
+			prodotto.setQuantita(req.getQuantita());
+		if (req.getTaglia()!=null)
+			prodotto.setTaglia(req.getTaglia());
+		
+		
+		if (req.getIdCategoria() != null)
+			prodotto.setCategoria(categoriaR.findById(req.getIdCategoria())
+					.orElseThrow(() -> 
+					new EcomBikeException("Categoria non trovata : " + req.getIdCategoria())
+					));
+		
+		if (req.getIdProduttore() != null)
+			prodotto.setProduttore(produttoreR.findById(req.getIdProduttore())
+					.orElseThrow(() -> 
+					new EcomBikeException("Produttore non trovato : " + req.getIdProduttore())
+					));
 		
 		prodottoR.save(prodotto);
 	}
