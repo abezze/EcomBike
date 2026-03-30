@@ -2,6 +2,8 @@ package com.betacom.ecombike.services.implementations;
 
 import static com.betacom.ecombike.utilities.Mapper.buildOrdineDTO;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,9 +63,18 @@ public class OrdineImpl implements IOrdineServices{
 		}
 		
 		Ordine ord = new Ordine();
-		ord.setDataOrdine(req.getDataOrdine());
-		ord.setOrarioOrdine(req.getOrarioOrdine());
-		ord.setStatoOrdine(StatoOrdine.valueOf(req.getStatoOrdine()));
+		if (req.getDataOrdine()!=null)
+			ord.setDataOrdine(req.getDataOrdine());
+		else 
+			ord.setDataOrdine(LocalDate.now());
+		if (req.getOrarioOrdine()!=null)
+			ord.setOrarioOrdine(req.getOrarioOrdine());
+		else
+			ord.setOrarioOrdine(LocalTime.now());
+		if (ord.getStatoOrdine()!=null)
+			ord.setStatoOrdine(StatoOrdine.valueOf(req.getStatoOrdine()));
+		else 
+			ord.setStatoOrdine(StatoOrdine.IN_CORSO);
 		ord.setUtente(ute);
 		
 		ord.setIndirizzo(ind);
