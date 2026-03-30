@@ -143,5 +143,19 @@ public class OrdineController {
 		}
 		return ResponseEntity.status(status).body(r);		
 	}
+	
+	@GetMapping("/findLastByUtenteAndStatoOrdine")
+	public ResponseEntity<Object> findLastByUtenteAndStatoOrdine (@RequestParam (required = true)  String userName ){
+		Object r = new Object();
+		HttpStatus status = HttpStatus.OK;
+		try {
+			r= ordS.findLastByUtenteAndStatoOrdine(userName);
+		} catch (Exception e) {
+			r=e.getMessage();
+			status = HttpStatus.BAD_REQUEST;
+		}
+		return ResponseEntity.status(status).body(r);
+		
+	}
 
 }

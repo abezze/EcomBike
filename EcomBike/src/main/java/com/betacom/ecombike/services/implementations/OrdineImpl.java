@@ -3,6 +3,7 @@ package com.betacom.ecombike.services.implementations;
 import static com.betacom.ecombike.utilities.Mapper.buildOrdineDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -160,6 +161,21 @@ public class OrdineImpl implements IOrdineServices{
     	ord.setIndirizzo(indSped);
 		
 		ordR.save(ord);
+	}
+
+
+	@Override
+	public OrdineDTO findLastByUtenteAndStatoOrdine(String userName) throws Exception {
+		
+				
+		Utente ute = uteR.findById(userName)
+				.orElseThrow(() -> new EcomBikeException("Utente non trovato : {}" + userName));
+		
+		Ordine ord = ordR.findLastByUtenteAndStatoOrdine(ute, StatoOrdine.IN_CORSO)
+				.orElseThrow(() -> new EcomBikeException("Ordine non trovato per username : {}" + userName));
+		
+		return buildOrdineDTO(ord);
+		
 	}
 
 }

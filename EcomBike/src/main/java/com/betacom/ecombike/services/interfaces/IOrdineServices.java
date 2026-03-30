@@ -16,4 +16,5 @@ public interface IOrdineServices {
 	List<OrdineDTO> list() throws Exception;
 	void setPagamento(OrdineReq req) throws Exception;
 	void setIndirizzoSpedizione(OrdineReq req) throws Exception;
+	OrdineDTO findLastByUtenteAndStatoOrdine(String userName) throws Exception;
 }
