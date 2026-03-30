@@ -47,17 +47,19 @@ public class OrdineController {
 	}
 	
 	@PostMapping("/create")
-	public ResponseEntity<Resp> create(@RequestBody(required = true)  OrdineReq req){
-		Resp r = new Resp();
+	public ResponseEntity<Object> create(@RequestBody(required = true)  OrdineReq req){
+		Object r = new Object();
 		HttpStatus status = HttpStatus.OK;
 		try {
-			ordS.create(req);
-			r.setMsg(msgS.get("rest_created"));
+			r = ordS.create(req);
+			
 		} catch (Exception e) {
-			r.setMsg(e.getMessage());
+			r=e.getMessage();
 			status = HttpStatus.BAD_REQUEST;
 		}
-		return ResponseEntity.status(status).body(r);		
+		return ResponseEntity.status(status).body(r);
+		
+		
 	}
 	
 	@PutMapping("/update")

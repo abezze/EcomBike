@@ -6,7 +6,7 @@ import com.betacom.ecombike.dto.inputs.OrdineReq;
 import com.betacom.ecombike.dto.outputs.OrdineDTO;
 
 public interface IOrdineServices {
-	void create(OrdineReq req) throws Exception;
+	OrdineDTO create(OrdineReq req) throws Exception;
 	void update(OrdineReq req) throws Exception;
 	void delete(Long id) throws Exception;
 

@@ -47,7 +47,7 @@ public class OrdineImpl implements IOrdineServices{
     
 	
     @Override
-	public void create(OrdineReq req) throws Exception {
+	public OrdineDTO create(OrdineReq req) throws Exception {
 	
 		log.debug("create {}", req);
 		
@@ -79,7 +79,9 @@ public class OrdineImpl implements IOrdineServices{
 		
 		ord.setIndirizzo(ind);
 		
-		ordR.save(ord);
+		Ordine save = ordR.save(ord);
+		
+		return buildOrdineDTO(save);
 	}
     
 
