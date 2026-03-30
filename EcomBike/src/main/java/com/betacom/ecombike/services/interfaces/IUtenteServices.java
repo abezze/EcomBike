@@ -15,5 +15,5 @@ public interface IUtenteServices {
 	List<UtenteDTO>list() throws Exception; 
 	UtenteDTO getByUserName(String userName)throws Exception;
 	LoginDTO login(LoginReq req) throws Exception;
-
+	void updateRole(UtenteReq req)throws Exception;
 }

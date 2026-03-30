@@ -173,5 +173,20 @@ public class UtenteController {
 		}
 		return ResponseEntity.status(status).body(r);		
 	}
+	
+	@PutMapping("/updateRole")
+	public ResponseEntity<Resp> updateRole(@RequestBody(required = true)  UtenteReq req){
+		Resp r = new Resp();
+		HttpStatus status = HttpStatus.OK;
+		try {
+			utS.updateRole(req);
+			r.setMsg(msgS.get("rest_updated"));
+		} catch (Exception e) {
+			log.debug("Error:" + e.getMessage());
+			r.setMsg(e.getMessage());
+			status = HttpStatus.BAD_REQUEST;
+		}
+		return ResponseEntity.status(status).body(r);		
+	}
 
 }

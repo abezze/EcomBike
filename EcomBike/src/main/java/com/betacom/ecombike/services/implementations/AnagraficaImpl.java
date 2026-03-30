@@ -36,6 +36,12 @@ public class AnagraficaImpl implements IAnagraficaServices{
 		log.debug("create []", req);
 		
 		
+		if (req.getUserName()== null)
+			throw new EcomBikeException("UserName non caricato");
+		
+		if (req.getPassword()== null)
+			throw new EcomBikeException("Password non caricato");
+		
 		if (req.getCognome()== null)
 			throw new EcomBikeException("Cognome non caricato");
 		

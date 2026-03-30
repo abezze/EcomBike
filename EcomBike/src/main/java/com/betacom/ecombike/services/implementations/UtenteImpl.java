@@ -123,4 +123,14 @@ public class UtenteImpl implements IUtenteServices{
 		
 	}
 
+	@Override
+	public void updateRole(UtenteReq req) throws Exception {
+		log.debug("updateRole {}", req);
+		Utente ut = utR.findById(req.getUserName())
+				.orElseThrow( () -> new EcomBikeException(msgS.get("user_nt_fnd")));
+		if(req.getRole()!=null)
+			ut.setRole(Roles.valueOf(req.getRole()));
+		utR.save(ut);
+	}
+
 }
