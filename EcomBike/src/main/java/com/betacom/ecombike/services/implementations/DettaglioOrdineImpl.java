@@ -3,6 +3,7 @@ package com.betacom.ecombike.services.implementations;
 import static com.betacom.ecombike.utilities.Mapper.buildDettaglioOrdineSenzaOrdineDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -52,8 +53,25 @@ public class DettaglioOrdineImpl implements IDettaglioOrdineServices{
 				.orElseThrow(() -> new EcomBikeException("Prodotto non trovato :" + req.getProdottoId()));
 		}
 		
-		DettaglioOrdine dett = new DettaglioOrdine();
-		dett.setQuantita(req.getQuantita());
+		DettaglioOrdine dett=null;
+		
+		if (ord!=null && prodotto!=null) {
+			Optional<DettaglioOrdine> firstByOrdineAndProdottoOrderByIdDesc = dettR.findFirstByOrdineAndProdottoOrderByIdDesc(ord,prodotto);
+			if (firstByOrdineAndProdottoOrderByIdDesc.isPresent())
+				dett= firstByOrdineAndProdottoOrderByIdDesc.get();
+			else {
+				dett = new DettaglioOrdine();
+				dett.setQuantita(req.getQuantita());
+				
+			}
+			dett.setQuantita(dett.getQuantita()+req.getQuantita());
+			if(prodotto.getQuantita()<dett.getQuantita())
+				throw new EcomBikeException("superata quantità disponibile");
+		} else {
+			dett = new DettaglioOrdine();
+			dett.setQuantita(req.getQuantita());
+		}
+		
 		
 		dett.setOrdine(ord);
 		dett.setProdotto(prodotto);
