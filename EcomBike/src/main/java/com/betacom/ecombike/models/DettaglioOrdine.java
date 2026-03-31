@@ -39,7 +39,7 @@ public class DettaglioOrdine {
 			)
 	private Prodotto prodotto;
     */
-     @OneToOne
+     @ManyToOne
 	@JoinColumn(name = "productCode", referencedColumnName = "productCode")
      private Prodotto prodotto;
      

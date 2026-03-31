@@ -12,6 +12,6 @@ import com.betacom.ecombike.models.Utente;
 @Repository
 public interface IOrdineRepository extends JpaRepository<Ordine, Long>{
 	//Optional<Prodotto> findByProductCode(Long prodottoId) throws Exception;
-	Optional<Ordine> findLastByUtenteAndStatoOrdine (Utente utente, StatoOrdine statoOrdine) throws Exception;
+	Optional<Ordine> findFirstByUtenteAndStatoOrdineOrderByIdDesc (Utente utente, StatoOrdine statoOrdine) throws Exception;
 
 }

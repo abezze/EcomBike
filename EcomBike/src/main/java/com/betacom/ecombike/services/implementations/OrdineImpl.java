@@ -184,7 +184,7 @@ public class OrdineImpl implements IOrdineServices{
 		Utente ute = uteR.findById(userName)
 				.orElseThrow(() -> new EcomBikeException("Utente non trovato : {}" + userName));
 		
-		Ordine ord = ordR.findLastByUtenteAndStatoOrdine(ute, StatoOrdine.IN_CORSO)
+		Ordine ord = ordR.findFirstByUtenteAndStatoOrdineOrderByIdDesc(ute, StatoOrdine.IN_CORSO)
 				.orElseThrow(() -> new EcomBikeException("Ordine non trovato per username : {}" + userName));
 		
 		return buildOrdineDTO(ord);
