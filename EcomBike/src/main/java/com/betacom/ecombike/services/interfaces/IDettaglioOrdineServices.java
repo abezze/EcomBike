@@ -14,4 +14,5 @@ public interface IDettaglioOrdineServices {
 	DettaglioOrdineDTO findById(Long id) throws Exception;
 	
 	List<DettaglioOrdineDTO> list() throws Exception;
+	List<DettaglioOrdineDTO> findAllByOrdine(Long ordineId) throws Exception;
 }

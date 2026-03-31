@@ -123,4 +123,21 @@ public class DettaglioOrdineImpl implements IDettaglioOrdineServices{
 		return buildDettaglioOrdineSenzaOrdineDTO(u);
 	}
 
+	@Override
+	public List<DettaglioOrdineDTO>	findAllByOrdine (Long  ordineId) throws Exception {
+		
+		Ordine ord = null;
+		
+		if (ordineId!=null) {
+			ord = ordR.findById(ordineId)
+				.orElseThrow(() -> new EcomBikeException("Ordine non trovato :" + ordineId));
+		}
+		
+		List<DettaglioOrdine> list = dettR.findAllByOrdine(ord);
+		
+		return buildDettaglioOrdineSenzaOrdineDTO(list);
+		
+		
+		
+	}
 }

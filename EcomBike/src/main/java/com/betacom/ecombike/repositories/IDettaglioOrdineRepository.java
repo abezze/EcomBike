@@ -1,5 +1,6 @@
 package com.betacom.ecombike.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +14,7 @@ import com.betacom.ecombike.models.Prodotto;
 public interface IDettaglioOrdineRepository extends JpaRepository<DettaglioOrdine, Long>{
 	
 	Optional<DettaglioOrdine> findFirstByOrdineAndProdottoOrderByIdDesc (Ordine ordine, Prodotto prodotto) throws Exception;
+	
+	List<DettaglioOrdine> findAllByOrdine (Ordine ordine) throws Exception;
 
 }
