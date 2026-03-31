@@ -3,13 +3,19 @@ package com.betacom.ecombike.utilities;
 public class AnagraficaUtils {
 	
 	public static boolean isCodiceFiscaleValido(String cf) {
-        if (cf == null || cf.length() != 16) return false;
+		boolean result = false;
+		
+        if (cf == null || (cf.length() != 11 && cf.length() != 16)) return false;
+        
         cf = cf.toUpperCase();
 
-        if (!cf.matches("^[A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST]{1}[0-9LMNPQRSTUV]{2}[A-Z]{1}[0-9LMNPQRSTUV]{3}[A-Z]{1}$"))
-            return false;
+        if (cf.matches("^[A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST]{1}[0-9LMNPQRSTUV]{2}[A-Z]{1}[0-9LMNPQRSTUV]{3}[A-Z]{1}$"))
+        	result = true;
         
-        return true;
+        if (!result)
+        	result = isPartitaIvaValida(cf);
+        
+        return result;
 	}
 	
 	public static boolean isPartitaIvaValida(String piva) {
