@@ -259,6 +259,7 @@ public class Mapper {
 				.colore(p.getColore())
 				.peso(p.getPeso())
 				.taglia(p.getTaglia())
+				.prezzo(p.getPrezzo())
 				//.image(uplS.buildUrl(p.getImage()))
 				.quantita(p.getQuantita())
 				.categoria(p.getCategoria()!=null?

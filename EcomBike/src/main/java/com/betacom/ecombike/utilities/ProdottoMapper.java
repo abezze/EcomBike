@@ -31,6 +31,7 @@ public class ProdottoMapper {
 				.peso(p.getPeso())
 				.taglia(p.getTaglia())
 				.quantita(p.getQuantita())
+				.prezzo(p.getPrezzo())
 				.image(uplS.buildUrl(p.getImage()))
 				.categoria(p.getCategoria()!=null?
 						buildCategoriaDTO(p.getCategoria()): null

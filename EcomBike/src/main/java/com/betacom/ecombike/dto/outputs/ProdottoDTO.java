@@ -26,6 +26,8 @@ public class ProdottoDTO {
 	private String taglia;
 	
 	private String image;
+	
+	private BigDecimal prezzo; 
 
 	private CategoriaDTO categoria;
 

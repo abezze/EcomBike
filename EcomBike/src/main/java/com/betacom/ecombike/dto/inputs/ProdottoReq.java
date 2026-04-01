@@ -22,6 +22,8 @@ public class ProdottoReq {
 	private Integer quantita;
 
 	private String taglia;
+	
+	private BigDecimal prezzo; 
 
 	private Long idCategoria;
 
