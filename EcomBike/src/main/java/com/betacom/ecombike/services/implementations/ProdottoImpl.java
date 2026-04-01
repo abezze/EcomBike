@@ -80,7 +80,7 @@ public class ProdottoImpl implements IProdottoServices{
 	public void update(ProdottoReq req) throws Exception {
 		log.debug("update {}", req);
 		
-		checkProdotto(req);
+		//checkProdotto(req);
 		
 		Prodotto prodotto = prodottoR.findById(req.getProductCode())
 				.orElseThrow(() -> new EcomBikeException("Prodotto non trovato"));
