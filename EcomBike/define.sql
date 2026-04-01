@@ -73,6 +73,7 @@
 
     create table prodotto (
         peso numeric(38,2) not null,
+        prezzo numeric(38,2),
         product_code integer not null,
         quantita integer not null,
         categoria_id bigint,
