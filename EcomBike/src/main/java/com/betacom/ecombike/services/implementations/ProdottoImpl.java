@@ -46,6 +46,7 @@ public class ProdottoImpl implements IProdottoServices{
 		prodotto.setPeso(req.getPeso());
 		prodotto.setQuantita(req.getQuantita());
 		prodotto.setTaglia(req.getTaglia());
+		prodotto.setPrezzo(req.getPrezzo());
 		
 		if (req.getIdCategoria() != null)
 			prodotto.setCategoria(categoriaR.findById(req.getIdCategoria())
@@ -94,6 +95,8 @@ public class ProdottoImpl implements IProdottoServices{
 			prodotto.setQuantita(req.getQuantita());
 		if (req.getTaglia()!=null)
 			prodotto.setTaglia(req.getTaglia());
+		if (req.getPrezzo()!=null)
+			prodotto.setPrezzo(req.getPrezzo());
 		
 		
 		if (req.getIdCategoria() != null)
