@@ -18,6 +18,7 @@ import com.betacom.ecombike.repositories.IOrdineRepository;
 import com.betacom.ecombike.repositories.IProdottoRepository;
 import com.betacom.ecombike.services.interfaces.IDettaglioOrdineServices;
 import com.betacom.ecombike.services.interfaces.IMessaggioServices;
+import com.betacom.ecombike.utilities.ProdottoMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,7 @@ public class DettaglioOrdineImpl implements IDettaglioOrdineServices{
 	private final IProdottoRepository prodR;
 	private final IOrdineRepository ordR;
 
+	private final ProdottoMapper prodM;
 
 	
     @Override
@@ -135,7 +137,7 @@ public class DettaglioOrdineImpl implements IDettaglioOrdineServices{
 		
 		List<DettaglioOrdine> list = dettR.findAllByOrdine(ord);
 		
-		return buildDettaglioOrdineSenzaOrdineDTO(list);
+		return prodM.buildDettaglioOrdineSenzaOrdineDTO(list);
 		
 		
 		

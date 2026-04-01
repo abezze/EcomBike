@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import com.betacom.ecombike.dto.outputs.DettaglioOrdineDTO;
 import com.betacom.ecombike.dto.outputs.ProdottoDTO;
+import com.betacom.ecombike.models.DettaglioOrdine;
 import com.betacom.ecombike.models.Prodotto;
 import com.betacom.ecombike.services.interfaces.IUploadServices;
 
@@ -49,4 +51,21 @@ public class ProdottoMapper {
 				.map(p-> buildProdottoDTO(p))
 				.collect(Collectors.toList());
 	}
+	
+	public  List<DettaglioOrdineDTO> buildDettaglioOrdineSenzaOrdineDTO(List<DettaglioOrdine> lD) {
+		return lD.stream()
+				.map(d -> buildDettaglioOrdineSenzaOrdineDTO(d) )
+				.collect(Collectors.toList());
+	}
+	public DettaglioOrdineDTO buildDettaglioOrdineSenzaOrdineDTO(DettaglioOrdine d) {
+		if (d == null) return null;
+		return DettaglioOrdineDTO.builder()
+				.id(d.getId())
+				.quantita(d.getQuantita())
+				//.ordine(buildOrdineDTO(d.getOrdine()))
+				.prodotto(buildProdottoDTO(d.getProdotto()))
+				.build();
+	}
+	
+	
 }
