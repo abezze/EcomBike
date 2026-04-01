@@ -43,7 +43,7 @@ public class Prodotto {
 	
 	private String image;
 	
-	private BigDecimal prezzo;
+	private BigDecimal prezzo; 
 
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
