@@ -38,6 +38,8 @@ public class ProdottoImpl implements IProdottoServices{
 		
 		if (req.getPeso() == null)
 			throw new EcomBikeException("Peso non inserito");
+		if (req.getPrezzo() == null)
+			throw new EcomBikeException("Prezzo non inserito");
 	}
 
 	private void initializeProdotto(ProdottoReq req, Prodotto prodotto) {
