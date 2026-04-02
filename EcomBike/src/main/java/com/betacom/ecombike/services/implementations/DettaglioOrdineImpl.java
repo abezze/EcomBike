@@ -53,7 +53,7 @@ public class DettaglioOrdineImpl implements IDettaglioOrdineServices{
 		if (req.getProdottoId()!=null) {
 			prodotto = prodR.findByProductCode(req.getProdottoId())
 				.orElseThrow(() -> new EcomBikeException("Prodotto non trovato :" + req.getProdottoId()));
-		} else throw new EcomBikeException("Prodotto id non valorizzato ");
+		} else throw new EcomBikeException("Prodotto id non valorizzato! ");
 		
 		DettaglioOrdine dett=null;
 		
