@@ -91,6 +91,22 @@ INSERT INTO tipo_pagamento
 VALUES(3, 'ABI ', 'Bonifico Bancario');
 
 
+------------------------------------------
+
+INSERT INTO produttore
+(id, codice_fiscale, partita_iva, marchio, nome_azienda)
+VALUES(1, NULL, '02494170133', 'Scott ', 'Scott Bike');
+INSERT INTO produttore
+(id, codice_fiscale, partita_iva, marchio, nome_azienda)
+VALUES(2, NULL, '13494170133', 'Santa Cruz', 'Santa Cruz Bike');
+INSERT INTO produttore
+(id, codice_fiscale, partita_iva, marchio, nome_azienda)
+VALUES(3, NULL, '02494170133', 'Rotwild', 'Rotwild Bike GMBH');
+INSERT INTO produttore
+(id, codice_fiscale, partita_iva, marchio, nome_azienda)
+VALUES(4, '02494170133', '02494170133', 'NS Bikes', 'NS Bike CO LTD');
+
+
 -------------------------------
 
 INSERT INTO ordine
@@ -122,7 +138,7 @@ INSERT INTO prodotto
 VALUES(18.60, 88888, 2, 2, 3, 'M', 'grigio', 'Rotwild RE 375 PRO ', 'rotwild_re375_pro-e70075ea-9ecc-4c90-8e53-775e473be23f.jpg', 8950.00);
 INSERT INTO prodotto
 (peso, product_code, quantita, categoria_id, produttore_id, taglia, colore, descrizione, image, prezzo)
-VALUES(15.00, 666777, 3, 4, 4, 'unica', 'nero', 'Dirt Bike ', NULL, 650.00);
+VALUES(15.00, 666777, 3, 4, 4, 'unica', 'nero', 'Dirt Bike ', 'ns-bikes-zircus-black-25acdbcb-002e-443b-b0a9-a83a9855d4f6.jpg', 650.00);
 
 
 ---------------------------------------------------------------------
@@ -154,18 +170,3 @@ VALUES(8123456, 2, 29, 1);
 INSERT INTO dettaglio_ordine
 (product_code, quantita, id, ordine_id)
 VALUES(8123456, 2, 15, 10);
-
-------------------------------------------
-
-INSERT INTO produttore
-(id, codice_fiscale, partita_iva, marchio, nome_azienda)
-VALUES(1, NULL, '02494170133', 'Scott ', 'Scott Bike');
-INSERT INTO produttore
-(id, codice_fiscale, partita_iva, marchio, nome_azienda)
-VALUES(2, NULL, '13494170133', 'Santa Cruz', 'Santa Cruz Bike');
-INSERT INTO produttore
-(id, codice_fiscale, partita_iva, marchio, nome_azienda)
-VALUES(3, NULL, '02494170133', 'Rotwild', 'Rotwild Bike GMBH');
-INSERT INTO produttore
-(id, codice_fiscale, partita_iva, marchio, nome_azienda)
-VALUES(4, '02494170133', '02494170133', 'NS Bikes', 'NS Bike CO LTD');

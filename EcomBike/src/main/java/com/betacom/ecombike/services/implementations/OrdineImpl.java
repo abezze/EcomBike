@@ -5,7 +5,6 @@ import static com.betacom.ecombike.utilities.Mapper.buildOrdineDTO;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -25,6 +24,7 @@ import com.betacom.ecombike.repositories.IPagamentoRepository;
 import com.betacom.ecombike.repositories.IUtenteRepository;
 import com.betacom.ecombike.services.interfaces.IMessaggioServices;
 import com.betacom.ecombike.services.interfaces.IOrdineServices;
+import com.betacom.ecombike.utilities.OrdineMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +43,7 @@ public class OrdineImpl implements IOrdineServices{
 	private final IPagamentoRepository pagamR;
 	private final IDettaglioOrdineRepository dettOrdR;
 
-
+	public final OrdineMapper ORD_M;
     
 	
     @Override
@@ -144,7 +144,7 @@ public class OrdineImpl implements IOrdineServices{
 		List<Ordine> lU = ordR.findAll();
 		
 		
-		return  buildOrdineDTO(lU);
+		return  ORD_M.buildOrdineDTO(lU);
 	}
 
 	@Override
