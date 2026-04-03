@@ -36,7 +36,7 @@ public class OrdineController {
 	
 	
 	@GetMapping("/listStatiOrdine")
-	public ResponseEntity<Object> listRuoli(){
+	public ResponseEntity<Object> listStatiOrdine(){
 		
 		HttpStatus status = HttpStatus.OK;
 		
