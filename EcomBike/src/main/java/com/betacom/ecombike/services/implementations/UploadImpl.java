@@ -29,14 +29,14 @@ public class UploadImpl implements IUploadServices{
 
 	private final Path uploadPath;
 	private final  IMessaggioServices msgS;
-	private final IProdottoRepository veiR;
+	private final IProdottoRepository prodR;
 	
 	
 	public UploadImpl(@Value("${app.upload.dir:uploads}") String uploadDir,  // valore per default della value
-			IMessaggioServices msgS, IProdottoRepository veiR ) {
+			IMessaggioServices msgS, IProdottoRepository prodR ) {
 	        this.uploadPath = Paths.get(uploadDir).toAbsolutePath().normalize(); // transform relative path in absolute  path
 	        this.msgS = msgS;
-	        this.veiR = veiR;
+	        this.prodR = prodR;
 	        init();
 	    }	
 	
@@ -75,7 +75,7 @@ public class UploadImpl implements IUploadServices{
         
         try {
             Files.copy(file.getInputStream(), destinationFile, StandardCopyOption.REPLACE_EXISTING);
-            Prodotto v = veiR.findById(id)
+            Prodotto v = prodR.findById(id)
             	.orElseThrow(() -> new EcomBikeException(msgS.get("veicolo_ntfnd")));	
             v.setImage(uniqueName);
             
@@ -94,10 +94,13 @@ public class UploadImpl implements IUploadServices{
 
 	@Override
 	public String buildUrl(String filename) {
-		return ServletUriComponentsBuilder.fromCurrentContextPath()  // recupera la parte iniziale dell URL // localhost:8080/
-                .path("/images/")    // il prefisse sarebbe image
-                .path(filename)                 // il nome del file
-                .toUriString(); 	
-	
+		if (prodR.safeExistsByImage(filename)) {
+			return ServletUriComponentsBuilder.fromCurrentContextPath()  // recupera la parte iniziale dell URL // localhost:8080/
+	                .path("/images/")    // il prefisse sarebbe image
+	                .path(filename)                 // il nome del file
+	                .toUriString();
+		}
+		
+		throw new EcomBikeException("Immagine non trovata: " + filename);
 	}
 }

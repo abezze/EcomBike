@@ -21,4 +21,10 @@ public interface IProdottoRepository extends JpaRepository<Prodotto, Integer>{
 			@Param("produttore") Long produttore
 			);
 
+	boolean existsByImageIgnoreCase(String filename);
+	
+	default boolean safeExistsByImage(String filename) {
+        return filename != null && existsByImageIgnoreCase(filename);
+    }
+
 }

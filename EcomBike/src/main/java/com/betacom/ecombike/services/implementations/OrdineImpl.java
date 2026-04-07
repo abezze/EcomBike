@@ -141,7 +141,7 @@ public class OrdineImpl implements IOrdineServices{
 	public List<OrdineDTO> list() throws Exception{
 		log.debug(" list Ordine" );
 		
-		List<Ordine> lU = ordR.findAll();
+		List<Ordine> lU = ordR.findAllByOrderByIdAsc();
 		
 		
 		return  ORD_M.buildOrdineDTO(lU);

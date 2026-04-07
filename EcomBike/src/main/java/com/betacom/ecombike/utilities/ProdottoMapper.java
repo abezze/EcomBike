@@ -1,5 +1,8 @@
 package com.betacom.ecombike.utilities;
 
+import static com.betacom.ecombike.utilities.Mapper.buildCategoriaDTO;
+import static com.betacom.ecombike.utilities.Mapper.buildProduttoreDTO;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,10 +14,6 @@ import com.betacom.ecombike.models.DettaglioOrdine;
 import com.betacom.ecombike.models.Prodotto;
 import com.betacom.ecombike.services.interfaces.IUploadServices;
 
-import static com.betacom.ecombike.utilities.Mapper.buildCategoriaDTO;
-import static com.betacom.ecombike.utilities.Mapper.buildDettaglioOrdineSenzaOrdineDTO;
-import static com.betacom.ecombike.utilities.Mapper.buildProduttoreDTO;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -24,6 +23,11 @@ public class ProdottoMapper {
 	private final IUploadServices uplS; 
 	
 	public  ProdottoDTO buildProdottoDTO(Prodotto p) {
+		String image = null;
+		try {
+			image = uplS.buildUrl(p.getImage());
+		} catch(Exception ignore) {}
+		
 		return ProdottoDTO.builder()
 				.productCode(p.getProductCode())
 				.descrizione(p.getDescrizione())
@@ -32,7 +36,7 @@ public class ProdottoMapper {
 				.taglia(p.getTaglia())
 				.quantita(p.getQuantita())
 				.prezzo(p.getPrezzo())
-				.image(uplS.buildUrl(p.getImage()))
+				.image(image)
 				.categoria(p.getCategoria()!=null?
 						buildCategoriaDTO(p.getCategoria()): null
 						)

@@ -53,10 +53,13 @@ public class UploadController {
 	@GetMapping("getUrl")
 	public ResponseEntity<Resp> getUrl(@RequestParam (required = true) String filename) {
 		Resp r = new Resp();
-		HttpStatus status = HttpStatus.OK;
-		
-		r.setMsg(uplS.buildUrl(filename));
-		return ResponseEntity.status(status).body(r);
+		try {
+			r.setMsg(uplS.buildUrl(filename));
+			return ResponseEntity.status(HttpStatus.OK).body(r);
+		} catch (Exception e) {
+			r.setMsg(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(r);
+		}
 	}
 
 }
