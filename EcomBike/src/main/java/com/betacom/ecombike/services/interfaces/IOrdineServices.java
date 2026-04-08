@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.betacom.ecombike.dto.inputs.OrdineReq;
 import com.betacom.ecombike.dto.outputs.OrdineDTO;
+import com.betacom.ecombike.enums.StatoOrdine;
 
 public interface IOrdineServices {
 	OrdineDTO create(OrdineReq req) throws Exception;
@@ -17,4 +18,6 @@ public interface IOrdineServices {
 	void setPagamento(OrdineReq req) throws Exception;
 	void setIndirizzoSpedizione(OrdineReq req) throws Exception;
 	OrdineDTO findLastByUtenteAndStatoOrdine(String userName) throws Exception;
+	
+	List<OrdineDTO> cercaOrdiniFiltrati(Long id, String userName, StatoOrdine statoOrdine) throws Exception;
 }

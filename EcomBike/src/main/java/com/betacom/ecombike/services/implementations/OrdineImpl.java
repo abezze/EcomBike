@@ -4,6 +4,7 @@ import static com.betacom.ecombike.utilities.Mapper.buildOrdineDTO;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -189,6 +190,22 @@ public class OrdineImpl implements IOrdineServices{
 		
 		return buildOrdineDTO(ord);
 		
+	}
+
+
+	@Override
+	public List<OrdineDTO> cercaOrdiniFiltrati(Long id, String userName, StatoOrdine statoOrdine) throws Exception {
+		log.debug("cercaOrdiniFiltrati: {}, {}, {}", id, userName, statoOrdine );
+		
+		Utente ute = null;
+		if (userName != null) {
+			ute = uteR.findById(userName).orElse(null);
+			if (ute == null) return new ArrayList<OrdineDTO>();
+		}
+		
+		List<Ordine> lU = ordR.cercaOrdiniFiltrati(id, ute, statoOrdine);
+		
+		return  ORD_M.buildOrdineDTO(lU);
 	}
 
 }

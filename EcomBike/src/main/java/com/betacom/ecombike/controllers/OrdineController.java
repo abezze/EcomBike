@@ -3,6 +3,7 @@ package com.betacom.ecombike.controllers;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -158,6 +159,27 @@ public class OrdineController {
 		}
 		return ResponseEntity.status(status).body(r);
 		
+	}
+	
+	@GetMapping("/cercaOrdiniFiltrati")
+	public ResponseEntity<Object> cercaOrdiniFiltrati (
+			@RequestParam (required = false)  Long id,
+			@RequestParam (required = false)  String userName,
+			@RequestParam (required = false)  String statoOrdine
+	){
+		Object r = new Object();
+		HttpStatus status = HttpStatus.OK;
+		try {
+			r= ordS.cercaOrdiniFiltrati(
+				id, 
+				(StringUtils.isBlank(userName) ? null : userName), 
+				(StringUtils.isBlank(statoOrdine) ? null : StatoOrdine.valueOf(statoOrdine))
+			);
+		} catch (Exception e) {
+			r=e.getMessage();
+			status = HttpStatus.BAD_REQUEST;
+		}
+		return ResponseEntity.status(status).body(r);
 	}
 
 }
