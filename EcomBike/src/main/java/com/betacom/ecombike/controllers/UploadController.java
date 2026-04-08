@@ -27,7 +27,7 @@ public class UploadController {
 			@RequestParam MultipartFile file,
 			@RequestParam Integer id) {
 		Resp r = new Resp();
-		HttpStatus status = HttpStatus.OK;
+//		HttpStatus status = HttpStatus.OK;
 		try {
 			 /*
 			   Test del content type:

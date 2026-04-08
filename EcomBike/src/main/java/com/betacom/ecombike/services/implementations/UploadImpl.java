@@ -76,7 +76,12 @@ public class UploadImpl implements IUploadServices{
         try {
             Files.copy(file.getInputStream(), destinationFile, StandardCopyOption.REPLACE_EXISTING);
             Prodotto v = prodR.findById(id)
-            	.orElseThrow(() -> new EcomBikeException(msgS.get("veicolo_ntfnd")));	
+            	.orElseThrow(() -> new EcomBikeException(msgS.get("prodotto_ntfnd")));
+            
+            if (v.getImage() != null) {
+	            removeImage(v.getImage());
+            }
+            
             v.setImage(uniqueName);
             
         } catch (IOException e) {
@@ -88,13 +93,13 @@ public class UploadImpl implements IUploadServices{
 
 	@Override
 	public void removeImage(String filename) throws Exception {
-		// TODO Auto-generated method stub
-		
+		Path filePath = uploadPath.resolve(filename).normalize();
+        Files.deleteIfExists(filePath);
 	}
 
 	@Override
 	public String buildUrl(String filename) {
-		if (prodR.safeExistsByImage(filename)) {
+		if (prodR.safeExistsByImage(this.uploadPath, filename)) {
 			return ServletUriComponentsBuilder.fromCurrentContextPath()  // recupera la parte iniziale dell URL // localhost:8080/
 	                .path("/images/")    // il prefisse sarebbe image
 	                .path(filename)                 // il nome del file

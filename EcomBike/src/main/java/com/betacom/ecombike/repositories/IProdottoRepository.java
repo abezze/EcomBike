@@ -1,5 +1,7 @@
 package com.betacom.ecombike.repositories;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +25,15 @@ public interface IProdottoRepository extends JpaRepository<Prodotto, Integer>{
 
 	boolean existsByImageIgnoreCase(String filename);
 	
-	default boolean safeExistsByImage(String filename) {
-        return filename != null && existsByImageIgnoreCase(filename);
+	default boolean safeExistsByImage(Path uploadPath, String filename) {
+	    if (filename == null || uploadPath == null) return false;
+	    
+	    if (existsByImageIgnoreCase(filename)) {
+	    	Path filePath = uploadPath.resolve(filename).normalize();
+		    return Files.exists(filePath);
+	    }
+	    
+	    return false;
     }
 
 }

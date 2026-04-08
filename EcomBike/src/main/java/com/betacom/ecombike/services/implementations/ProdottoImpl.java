@@ -11,11 +11,10 @@ import com.betacom.ecombike.dto.outputs.ProdottoDTO;
 import com.betacom.ecombike.exceptions.EcomBikeException;
 import com.betacom.ecombike.models.Prodotto;
 import com.betacom.ecombike.repositories.ICategoriaRepository;
-import com.betacom.ecombike.repositories.IDettaglioOrdineRepository;
 import com.betacom.ecombike.repositories.IProdottoRepository;
 import com.betacom.ecombike.repositories.IProduttoreRepository;
 import com.betacom.ecombike.services.interfaces.IProdottoServices;
-import com.betacom.ecombike.utilities.Mapper;
+import com.betacom.ecombike.services.interfaces.IUploadServices;
 import com.betacom.ecombike.utilities.ProdottoMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -31,6 +30,8 @@ public class ProdottoImpl implements IProdottoServices{
 	private final IProduttoreRepository produttoreR;
 	
 	private final ProdottoMapper prodM;
+	
+	private final IUploadServices uploadS;
 	
 	private void checkProdotto(ProdottoReq req) {
 		if (StringUtils.isBlank(req.getDescrizione()))
@@ -122,6 +123,9 @@ public class ProdottoImpl implements IProdottoServices{
 		log.debug("delete {}", productCode);
 		Prodotto prodotto = prodottoR.findById(productCode)
 				.orElseThrow(() -> new EcomBikeException("Prodotto non trovato"));
+		
+		if (prodotto.getImage() != null)
+			uploadS.removeImage(prodotto.getImage());
 		
 		prodottoR.delete(prodotto);		
 	}
