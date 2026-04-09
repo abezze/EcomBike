@@ -63,10 +63,8 @@ public class DettaglioOrdineImpl implements IDettaglioOrdineServices{
 				dett= firstByOrdineAndProdottoOrderByIdDesc.get();
 			else {
 				dett = new DettaglioOrdine();
-				dett.setQuantita(req.getQuantita());
-				
 			}
-			dett.setQuantita(dett.getQuantita()+req.getQuantita());
+			dett.setQuantita((dett.getQuantita() == null) ? req.getQuantita() : dett.getQuantita()+req.getQuantita());
 			if(prodotto.getQuantita()<dett.getQuantita())
 				throw new EcomBikeException("superata quantità disponibile");
 		} else {
