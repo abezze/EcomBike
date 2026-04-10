@@ -7,7 +7,7 @@ public enum StatoOrdine {
 	PAGATO,
 	IN_LAVORAZIONE,
 	SPEDITO,
+	CONSEGNATO,
+	RESTITUITO,
 	CANCELLATO
-	
-
 }
