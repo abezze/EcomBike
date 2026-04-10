@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -185,11 +186,12 @@ public class OrdineImpl implements IOrdineServices{
 		Utente ute = uteR.findById(userName)
 				.orElseThrow(() -> new EcomBikeException("Utente non trovato : {}" + userName));
 		
-		Ordine ord = ordR.findFirstByUtenteAndStatoOrdineOrderByIdDesc(ute, StatoOrdine.IN_CORSO)
-				.orElseThrow(() -> new EcomBikeException("Ordine non trovato per username : {}" + userName));
+		Optional<Ordine> ord = ordR.findFirstByUtenteAndStatoOrdineOrderByIdDesc(ute, StatoOrdine.IN_CORSO);
 		
-		return buildOrdineDTO(ord);
-		
+		if (ord.isPresent())
+			return buildOrdineDTO(ord.get());
+		else
+			return null;
 	}
 
 
