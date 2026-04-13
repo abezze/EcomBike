@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class IndirizzoSpedizioneImpl implements IIndirizzoSpedizioneServices{
 	private final IIndirizzoSpedizioneRepository indirizzoR;
-	private final IOrdineRepository uteR;
+	private final IOrdineRepository ordineR;
 	
 	
 	@Transactional (rollbackFor = EcomBikeException.class)
@@ -62,7 +62,7 @@ public class IndirizzoSpedizioneImpl implements IIndirizzoSpedizioneServices{
 		if (StringUtils.isBlank(req.getCodiceFiscale()) && StringUtils.isBlank(req.getPartitaIva()))
 			throw new EcomBikeException("Inserire almeno uno tra codice Fiscale e partita IVA");
 		
-		Ordine ord = uteR.findById(req.getOrdineId())
+		Ordine ord = ordineR.findById(req.getOrdineId())
 				.orElseThrow(() -> new EcomBikeException("Ordine non trovato :" + req.getOrdineId()));
 		
 		
@@ -80,8 +80,10 @@ public class IndirizzoSpedizioneImpl implements IIndirizzoSpedizioneServices{
 
 		indirizzo.setOrdineIndirizzo(ord);
 		
-		indirizzoR.save(indirizzo);
-				
+		indirizzo = indirizzoR.save(indirizzo);
+		
+		ord.setIndirizzo(indirizzo);
+		ordineR.save(ord);
 	}
 	
 	@Transactional (rollbackFor = EcomBikeException.class)
