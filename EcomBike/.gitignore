@@ -33,5 +33,9 @@ build/
 .vscode/
 
 ###
+/src/main/resources/db-config.properties
+/sql/define.sql
+/sql/drop.sql
+/uploads/
 /EcomBike.log
 /EcomBike.log.*.gz
