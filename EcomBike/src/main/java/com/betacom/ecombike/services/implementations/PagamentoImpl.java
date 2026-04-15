@@ -2,6 +2,8 @@ package com.betacom.ecombike.services.implementations;
 
 import static com.betacom.ecombike.utilities.Mapper.buildPagamentoDTO;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -49,8 +51,16 @@ public class PagamentoImpl implements IPagamentoServices{
 				.orElseThrow(() -> new EcomBikeException("Ordine non trovato : "+ req.getOrdineId()));
 		
 		Pagamento pagam = new Pagamento();
-		pagam.setDataPagamento(req.getDataPagamento());
-		pagam.setOrarioPagamento(req.getOrarioPagamento());
+		if(req.getDataPagamento() != null)
+			pagam.setDataPagamento(req.getDataPagamento());
+		else
+			pagam.setDataPagamento(LocalDate.now());
+		
+		if(req.getOrarioPagamento() != null)
+			pagam.setOrarioPagamento(req.getOrarioPagamento());
+		else
+			pagam.setOrarioPagamento(LocalTime.now());
+		
 		pagam.setAmount(req.getAmount());
 		
 		pagam.setOrdine(ord);

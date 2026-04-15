@@ -50,7 +50,12 @@ public class UtenteImpl implements IUtenteServices{
 		
 		ut.setPassword(req.getPassword());
 		ut.setUserName(req.getUserName());
-		ut.setRole(Roles.valueOf(req.getRole()));
+		
+		// Il primo che si registra è sempre l'ADMIN
+		if(utR.count() == 0L)
+			ut.setRole(Roles.ADMIN);
+		else
+			ut.setRole(Roles.valueOf(req.getRole()));
 		
 		utR.save(ut);
 	}

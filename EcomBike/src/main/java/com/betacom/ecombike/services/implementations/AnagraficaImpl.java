@@ -82,7 +82,13 @@ public class AnagraficaImpl implements IAnagraficaServices{
 			ute = new Utente();
 			ute.setEmail(req.getEmail());
 			ute.setPassword(req.getPassword());
-			ute.setRole(Roles.valueOf(req.getRole()));
+			
+			// Il primo che si registra è sempre l'ADMIN
+			if(uteR.count() == 0L)
+				ute.setRole(Roles.ADMIN);
+			else
+				ute.setRole(Roles.valueOf(req.getRole()));
+			
 			ute.setUserName(req.getUserName());
 		}	
 		Utente save = uteR.save(ute);

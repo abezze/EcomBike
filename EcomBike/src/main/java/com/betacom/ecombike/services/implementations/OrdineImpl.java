@@ -18,11 +18,13 @@ import com.betacom.ecombike.models.DettaglioOrdine;
 import com.betacom.ecombike.models.IndirizzoSpedizione;
 import com.betacom.ecombike.models.Ordine;
 import com.betacom.ecombike.models.Pagamento;
+import com.betacom.ecombike.models.Prodotto;
 import com.betacom.ecombike.models.Utente;
 import com.betacom.ecombike.repositories.IDettaglioOrdineRepository;
 import com.betacom.ecombike.repositories.IIndirizzoSpedizioneRepository;
 import com.betacom.ecombike.repositories.IOrdineRepository;
 import com.betacom.ecombike.repositories.IPagamentoRepository;
+import com.betacom.ecombike.repositories.IProdottoRepository;
 import com.betacom.ecombike.repositories.IUtenteRepository;
 import com.betacom.ecombike.services.interfaces.IMessaggioServices;
 import com.betacom.ecombike.services.interfaces.IOrdineServices;
@@ -44,6 +46,7 @@ public class OrdineImpl implements IOrdineServices{
 	private final IIndirizzoSpedizioneRepository indSpedR;
 	private final IPagamentoRepository pagamR;
 	private final IDettaglioOrdineRepository dettOrdR;
+	private final IProdottoRepository prodR;
 
 	public final OrdineMapper ORD_M;
     
@@ -117,8 +120,35 @@ public class OrdineImpl implements IOrdineServices{
 			ut.setDataOrdine(req.getDataOrdine());
 		if(req.getOrarioOrdine()!=null)
 			ut.setOrarioOrdine(req.getOrarioOrdine());;
-		if(req.getStatoOrdine()!=null)
-			ut.setStatoOrdine(StatoOrdine.valueOf(req.getStatoOrdine()));
+		if(req.getStatoOrdine()!=null) {
+			StatoOrdine nuovoSO = StatoOrdine.valueOf(req.getStatoOrdine());
+			if (!ut.getStatoOrdine().equals(nuovoSO)) {
+				for (DettaglioOrdine dettaglioOrdine : ut.getDettagli()) {
+					// NB: Potrebbero mancare da implementare altre casistiche
+					Prodotto prodotto = prodR.findById(dettaglioOrdine.getProdotto().getProductCode())
+							.orElseThrow( () -> new EcomBikeException(msgS.get("prodotto_nt_fnd")));
+					
+					if(ut.getStatoOrdine().equals(StatoOrdine.IN_CORSO) && nuovoSO.equals(StatoOrdine.CONFERMATO)) {
+						Integer quantitaProdRimanenti = prodotto.getQuantita() - dettaglioOrdine.getQuantita();
+						if (quantitaProdRimanenti < 0)
+							throw new EcomBikeException("Sono disponibili solo " + prodotto.getQuantita() + " pezzi per il prodotto con productCode: " + prodotto.getProductCode());
+						
+						prodotto.setQuantita(quantitaProdRimanenti);
+					} else if (
+						!ut.getStatoOrdine().equals(StatoOrdine.IN_CORSO) && (
+							(!ut.getStatoOrdine().equals(StatoOrdine.RESTITUITO) && nuovoSO.equals(StatoOrdine.CANCELLATO)) ||
+							(!ut.getStatoOrdine().equals(StatoOrdine.CANCELLATO) && nuovoSO.equals(StatoOrdine.RESTITUITO))
+						)
+					) {
+						prodotto.setQuantita(prodotto.getQuantita() + dettaglioOrdine.getQuantita());
+					}
+					
+					prodR.save(prodotto);
+				}
+				ut.setStatoOrdine(nuovoSO);
+			}
+		}
+		
 		ordR.save(ut);
 	}
 

@@ -33,7 +33,5 @@ build/
 .vscode/
 
 ###
-/define.sql
-/drop.sql
 /EcomBike.log
 /EcomBike.log.*.gz
