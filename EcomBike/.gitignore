@@ -39,3 +39,4 @@ build/
 /uploads/
 /EcomBike.log
 /EcomBike.log.*.gz
+/bin/
